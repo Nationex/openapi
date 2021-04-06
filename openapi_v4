@@ -1072,7 +1072,7 @@ paths:
           name: startDate
           description: Starting date of the shipments included in the manifest. Defaults to current date
           required: false
-          example: 2021-03-31
+          example: "2021-03-31"
           schema:
             type: string
             format: date-time #TODO À tester/vérifier
@@ -1080,7 +1080,7 @@ paths:
           name: endDate
           description: Ending date of the shipments included in the manifest. Defaults to current date
           required: false
-          example: 2021-03-31
+          example: "2021-03-31"
           schema:
             type: string
             format: date-time #TODO À tester/vérifier
@@ -1134,7 +1134,7 @@ paths:
           name: startDate
           description: Starting date of the shipments included in the report. Defaults to the current date
           required: false
-          example: 2021-03-31
+          example: "2021-03-31"
           schema:
             type: string
             format: date-time #TODO À tester/vérifier
@@ -1142,7 +1142,7 @@ paths:
           name: endDate
           description: Ending date of the shipments included in the report. Defaults to the current date
           required: false
-          example: 2021-03-31
+          example: "2021-03-31"
           schema:
             type: string
             format: date-time #TODO À tester/vérifier
