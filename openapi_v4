@@ -95,12 +95,6 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - Shipments
@@ -158,12 +152,6 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /Shipments/{id}/reports:
     get:
       tags:
@@ -221,12 +209,6 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /Shipments/{id}/labels:
     get:
       tags:
@@ -299,12 +281,6 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /Shipments/:
     get:
       tags:
@@ -372,12 +348,6 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /Users/login:
     post:
       tags:
@@ -429,12 +399,6 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /Users/:
     put:
       tags:
