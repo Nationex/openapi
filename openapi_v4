@@ -2370,18 +2370,6 @@ components:
           description: No signature required if true
           example: false
           default: false
-        IsGroup:
-          type: boolean
-          #TODO : description
-          default: false
-        GroupId:
-          #TODO : description
-          example: ""
-          type: string
-        ConsigneeInGroupUniqueId:
-          #TODO : description
-          example: ""
-          type: string
     DTOEconomaxPackageRenewal:
       type: object
       required:
