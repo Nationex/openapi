@@ -1427,7 +1427,7 @@ paths:
       parameters:
         - in: path
           name: postalCode
-          description: Nationex Customer Id (5 or 6 digits)
+          description: Postal code
           required: true
           example: H1B1Y8
           schema:
