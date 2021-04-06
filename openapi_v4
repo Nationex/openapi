@@ -1254,8 +1254,8 @@ paths:
     get:
       tags:
         - Customers
-      summary: 'Send pickup notification'
-      description: 'Sends a notification'  #TODO : Review this description
+      summary: 'Send a pickup notification'
+      description: 'Sends a notification to the consignee where the package is being picked up'
       parameters:
         - in: path
           name: id
@@ -1339,7 +1339,7 @@ paths:
       tags:
         - Customers
       summary: 'Send pickup-delivery notification'
-      description: 'Sends a notification' #TODO : Review this description
+      description: 'Sends a notification to the consignee where the package is being picked up'
       parameters:
         - in: path
           name: id
