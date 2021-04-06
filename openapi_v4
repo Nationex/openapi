@@ -2178,7 +2178,7 @@ components:
           enum: [Delivery, Pickup, PickupDelivery]
           example: Delivery
           default: Delivery
-          #description: TODO : description
+          description: A delivery is a shipment with the Nationex Customer as origin and Consignee as destination
         TotalParcels:
           type: integer
           format: int32
