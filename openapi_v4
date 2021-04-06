@@ -1255,7 +1255,7 @@ paths:
       tags:
         - Customers
       summary: 'Send a pickup notification'
-      description: 'Sends a notification to the consignee where the package is being picked up'
+      description: 'Sends a notification to the  email provided'
       parameters:
         - in: path
           name: id
@@ -1339,7 +1339,7 @@ paths:
       tags:
         - Customers
       summary: 'Send pickup-delivery notification'
-      description: 'Sends a notification to the consignee where the package is being picked up'
+      description: 'Sends a notification to the email provided'
       parameters:
         - in: path
           name: id
