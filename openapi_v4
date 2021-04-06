@@ -300,7 +300,7 @@ paths:
           example: 123 Main Street, New York, NY 10030
         - name: startDate
           in: query
-          description: Start date in date range
+          description: Start date in date range, defaults to current date.
           required: false
           schema:
             type: string
@@ -308,7 +308,7 @@ paths:
           example: "2018-05-01"
         - name: endDate
           in: query
-          description: End date in date range
+          description: End date in date range, defaults to current date.
           required: false
           schema:
             type: string
