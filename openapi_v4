@@ -1,0 +1,2714 @@
+openapi: 3.0.0
+info:
+  version: '4.0'
+  title: Nationex API
+  description: Nationex API
+  contact:
+    email: tech@nationex.com
+    url: https://nationex.com
+servers:
+  - url: 'https://{environment}.nationex.com/v{version}'
+    variables:
+      environment:
+        default: apidev
+        enum:
+          - api
+          - apidev
+      version:
+        default: "4"
+        enum:
+          - "4"
+  - url: 'http://localhost:56000/v{version}'
+    variables:
+      version:
+        default: "4"
+        enum:
+          - "4"
+paths:
+  /Shipments/{id}:
+    get:
+      tags:
+        - Shipments
+      summary: 'Get shipment'
+      description: 'Returns details about a particular shipment'
+      operationId: getShipment
+      parameters:
+        - name: id
+          in: path
+          description: ID of the shipment
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: tracking
+          in: query
+          description: Returns tracking or not
+          example: true
+          required: false
+          schema:
+            type: boolean
+        - name: parcels
+          in: query
+          description: Returns the parcels or not
+          example: true
+          required: false
+          schema:
+            type: boolean
+        - name: consol
+          in: query
+          description: Returns the consolIds or not
+          example: true
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 'Details about a shipment by ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOShipment'
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - Shipments
+      summary: 'Cancel shipment'
+      description: 'Cancel a shipment, can only be used before 8 PM EST'
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          description: ID of the shipment
+          required: true
+          schema:
+            type: integer
+            format: int32
+      security:
+        - BasicAuth: []
+      responses:
+        '204':
+          description: 'No content'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Success:
+                    type: boolean
+              examples:
+                    Boolean Response:
+                        value:
+                          true
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /Shipments/{id}/reports:
+    get:
+      tags:
+        - Shipments
+      summary: 'Get tracking PDF'
+      description: 'Returns details about a particular shipment in PDF'
+      operationId: getReports
+      parameters:
+        - name: id
+          in: path
+          description: ID of the shipment
+          example: 123456
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: consol
+          in: query
+          description: Returns the consolIds or not
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /Shipments/{id}/labels:
+    get:
+      tags:
+        - Shipments
+      summary: 'Get labels'
+      description: 'Returns labels attached to a particular shipment'
+      operationId: getLabels
+      parameters:
+        - name: id
+          in: path
+          description: ID of the shipment
+          required: true
+          example: 123456
+          schema:
+            type: integer
+            format: int32
+        - name: type
+          in: query
+          description: Type of file
+          example: PDF
+          required: false
+          schema:
+            type: string
+        - name: orientation
+          in: query
+          description: Orientation of the file
+          example: portrait
+          required: false
+          schema:
+            type: string
+        - name: format
+          in: query
+          description: Page format of the file
+          required: false
+          schema:
+            type: string
+          example: 4x6
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /Shipments/:
+    get:
+      tags:
+        - Shipments
+      summary: 'Get shipment list'
+      description: 'Returns the list of shipment'
+      operationId: getListShipment
+      parameters:
+        - name: search
+          in: query
+          description: Query string for search
+          required: false
+          schema:
+            type: string
+          example: 123 Main Street, New York, NY 10030
+        - name: startDate
+          in: query
+          description: Start date in date range
+          required: false
+          schema:
+            type: string
+            format: date
+          example: "2018-05-01"
+        - name: endDate
+          in: query
+          description: End date in date range
+          required: false
+          schema:
+            type: string
+            format: date
+          example: "2018-06-01"
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DTOShipment'
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /Users/login:
+    post:
+      tags:
+        - Users
+      summary: 'Get login'
+      description: 'Logs in and returns the authentication cookie'
+      requestBody:
+        description: A JSON object containing the login and password
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      security: [] # no authentication
+      responses:
+        '200':
+          description: >
+            Successfully authenticated
+            The session ID is returned in a cookie named `JSESSIONID`. You need to include this cookie in subsequent requests.
+          #headers:
+          #  Set-Cookie:
+          #    schema:
+          #      type: string
+          #      example: JSESSIONID=abcde12345; Path=/; HttpOnly
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /Users/:
+    put:
+      tags:
+        - Users
+      summary: 'Update user'
+      description: 'Update an user account'
+      requestBody:
+        description: User object as JSON
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DTOUser'
+            example:
+              username: username123
+              email: test@test.com
+      security: [] # no authentication
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Success:
+                    type: boolean
+              examples:
+                    Boolean Response:
+                      value:
+                        true
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "Page not found"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/:
+    get:
+      tags:
+        - Customers
+      summary: 'Get customer info'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema: 
+            type: integer
+            format: int32
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOCustomerInfo'
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The CustomerInfo does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 409
+                message: "Resource not found"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"  
+  /Customers/{id}/shipment:
+    post:
+      tags:
+        - Customers
+      summary: 'Create shipment'
+      description: 'Create a new shipment'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+      security:
+        - BasicAuth: []
+      requestBody:
+          description: Shipment to create
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOShipmentCreate'
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOShipmentCreated'
+        '400':
+          description: 'InvalidInput: 	The max length of a field has been exceeded or the postal code is not covered by Nationex. The specific error message will be returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "Address1 length is too long"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '409':
+          description: 'Conflict: The ShipmentId already exists'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Conflict'
+              example: 
+                code: 409
+                message: "Duplicate shipment ID: 501339228"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/rates:
+    post:
+      tags:
+        - Customers
+      summary: 'Get rates'
+      description: 'Get rates for a shipment'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+      security:
+        - BasicAuth: []
+      requestBody:
+          description: Shipment rates request
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOShipmentRatesRequest'
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTORatesDetail'
+        '400':
+          description: 'InvalidInput: 	The postal code is not covered by Nationex or other invalid input. The specific error message will be returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "The postal code A0A0A7 is not served by Nationex"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/consignees:
+    post:
+      tags:
+        - Customers
+      summary: 'Create consignee'
+      description: 'Create a consignee'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+            minimum: 10000
+            maximum: 999999
+      requestBody:
+          description: Consignee to modify
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOConsignee'
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOConsigneeCreated'
+        '400':
+          description: 'InvalidInput:	The max length of a field has been exceeded or other input error. Specific error message will be returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "Address1 length is too long"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ConsigneeId 388283984 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/consignees/{consigneeId}:
+    get:
+      tags:
+        - Customers
+      summary: 'Get consignee'
+      description: 'Get consignee details'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+            minimum: 10000
+            maximum: 999999
+        - in: path
+          name: consigneeId
+          description: Consignee Id used to identify and retrieve the consignee, also known as Account Id
+          required: true
+          example: MXD29192
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 15
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOConsignee'
+        '400':
+          description: 'InvalidInput:	The max length of a field has been exceeded or other input error. Specific error message will be returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "Address1 length is too long"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ConsigneeId 388283984 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+    put:
+      tags:
+        - Customers
+      summary: 'Modify consignee'
+      description: 'Modify a consignee details'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+            minimum: 10000
+            maximum: 999999
+        - in: path
+          name: consigneeId
+          description: Consignee Id used to identify and retrieve the consignee, also known as Account Id
+          required: true
+          example: MXD29192
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 15
+      requestBody:
+          description: Consignee to modify
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOConsignee'
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Success'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Success:
+                    type: boolean
+              examples:
+                    Boolean Response:
+                        value:
+                          true
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ConsigneeId 388283984 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+    delete:
+      tags:
+        - Customers
+      summary: 'Delete consignee'
+      description: 'Delete a consignee'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+            minimum: 10000
+            maximum: 999999
+        - in: path
+          name: consigneeId
+          description: Consignee Id used to identify and retrieve the consignee, also known as Account Id
+          required: true
+          example: MXD29192
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 15
+      security:
+        - BasicAuth: []
+      responses:
+        '204':
+          description: 'No content'
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ConsigneeId 388283984 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/consignees/:
+    get:
+      tags:
+        - Customers
+      summary: 'Get consignee list'
+      description: 'Get list of consignee details'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+            minimum: 10000
+            maximum: 999999
+        - in: query
+          name: paging
+          description: Page number starting at 1
+          required: true
+          example: 1
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: count
+          description: Number of consignees returned
+          required: true
+          example: 1
+          schema:
+            type: integer
+            format: int32
+            maximum: 5000
+        - in: query
+          name: includeArchived
+          description: If true, also return the consignees that have been deleted
+          required: false
+          example: false
+          schema:
+            type: boolean
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DTOConsignee'
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/transitDelay:
+    get:
+      tags:
+        - Customers
+      summary: 'Get transit delay'
+      description: 'Get estimated time of delivery for a specified Destination'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: destination
+          description: Postal Code of the destination
+          required: true
+          example: J4T4R5
+          schema:
+            type: string
+            maxLength: 6
+            #TODO : Pattern
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOTransitDelay'
+        '400':
+          description: 'InvalidInput:	The postal code is not server by Nationex or other input error. Specific error message will be returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "Postal code A0A0A7 is not served by Nationex"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ConsigneeId 388283984 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/driverManifests:
+    get:
+      tags:
+        - Customers
+      summary: 'Get driver manifest'
+      description: 'Get a PDF report to print and give to the Nationex driver when he comes and pick up shipments'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: startDate
+          description: Starting date of the shipments included in the manifest. Defaults to current date
+          required: false
+          example: 2021-03-31
+          schema:
+            type: string
+            format: date-time #TODO À tester/vérifier
+        - in: query
+          name: endDate
+          description: Ending date of the shipments included in the manifest. Defaults to current date
+          required: false
+          example: 2021-03-31
+          schema:
+            type: string
+            format: date-time #TODO À tester/vérifier
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          #TODO Response
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/customerManifests:
+    get:
+      tags:
+        - Customers
+      summary: 'Get customer manifest'
+      description: 'Get a list of shipments created between specified dates in PDF or XLSX format'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: startDate
+          description: Starting date of the shipments included in the report. Defaults to the current date
+          required: false
+          example: 2021-03-31
+          schema:
+            type: string
+            format: date-time #TODO À tester/vérifier
+        - in: query
+          name: endDate
+          description: Ending date of the shipments included in the report. Defaults to the current date
+          required: false
+          example: 2021-03-31
+          schema:
+            type: string
+            format: date-time #TODO À tester/vérifier
+        - in: query
+          name: format
+          description: Format of the report, either pdf or xlsx. Defaults to PDF
+          required: false
+          example: pdf
+          schema:
+            type: string
+            format: '/^(pdf|xlsx)$/'
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          #TODO Response
+          #content: TODO : Can't specify format
+           # application/pdf:
+            #  schema:
+             #   type: string
+              #  format: binary
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/economaxPackage:
+    put:
+      tags:
+        - Customers
+      summary: 'Renew economax package'
+      description: 'Renew an economax package'
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+          description: Renewal package information
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOEconomaxPackageRenewal'
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Success'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Success:
+                    type: boolean
+              examples:
+                    Boolean Response:
+                        value:
+                          true
+        '400':
+          description: 'InvalidInput:	Specific error message will be returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "Customer 113300 is not active"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/SendPickupNotification:
+    get:
+      tags:
+        - Customers
+      summary: 'Send pickup notification'
+      description: 'Sends a notification'  #TODO : Review this description
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: shipmentId
+          description: Nationex Shipment Id (9 digits)
+          required: true
+          example: 501293728
+          schema:
+            type: integer
+            format: int32
+            minimum: 100000000
+            maximum: 999999999
+        - in: query
+          name: email
+          description: Email address #TODO: Can we put multiple emails ?
+          required: true
+          example: myemail@gmail.com
+          schema:
+            type: string
+        - in: query
+          name: language
+          description: "Email language" #TODO: Can we put multiple emails ?
+          required: true #TODO: required ?
+          example: Fr
+          schema:
+            type: string
+            enum: [Undefined, Fr, En] #TODO : Test this
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Success'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Success:
+                    type: boolean
+              examples:
+                    Boolean Response:
+                        value:
+                          true
+        '400':
+          description: 'InvalidInput:  Specific error message will be returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "Email myem/ail@gmail.com is invalid"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '500':
+          description: 'InternalServerError:   There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Customers/{id}/SendPickupLivNotification:
+    get:
+      tags:
+        - Customers
+      summary: 'Send pickup-delivery notification'
+      description: 'Sends a notification' #TODO : Review this description
+      parameters:
+        - in: path
+          name: id
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: shipmentId
+          description: Nationex Shipment Id (9 digits)
+          required: true
+          example: 501293728
+          schema:
+            type: integer
+            format: int32
+            minimum: 100000000
+            maximum: 999999999
+        - in: query
+          name: email
+          description: Email address #TODO: Can we put multiple emails ?
+          required: true
+          example: myemail@gmail.com
+          schema:
+            type: string
+        - in: query
+          name: language
+          description: "Email language" #TODO: Can we put multiple emails ?
+          required: true #TODO: required ?
+          example: Fr
+          schema:
+            type: string
+            enum: [Undefined, Fr, En] #TODO : Test this
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Success'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Success:
+                    type: boolean
+              examples:
+                    Boolean Response:
+                        value:
+                          true
+        '400':
+          description: 'InvalidInput:  Specific error message will be returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "Email myem/ail@gmail.com is invalid"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '500':
+          description: 'InternalServerError:   There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Locations/{postalCode}:
+    get:
+      tags:
+        - Locations
+      summary: 'Get location'
+      description: 'Get location services availability'
+      parameters:
+        - in: path
+          name: postalCode
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: H1B1Y8
+          schema:
+            type: string
+            maxLength: 6
+            #TODO : Pattern
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOLocation'
+        '400':
+          description: 'InvalidInput:  The postal code format is invalid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "Postal code A0A0A is not valid"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "Postal code D0A1A0 does not exist"
+        '500':
+          description: 'InternalServerError:   There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Locations:
+    get:
+      tags:
+        - Locations
+      summary: 'Get location list'
+      description: 'Get list of locations services availability'
+      parameters:
+        - in: query
+          name: page
+          description: Page iterator
+          required: true
+          example: 1
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - in: query
+          name: count
+          description: "Locations count"
+          required: true
+          example: 100
+          schema:
+            type: integer
+            format: int32
+            maximum: 5000
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Ok'
+          #headers TODO : Include headers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DTOLocation'
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '500':
+          description: 'InternalServerError:   There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+  /Shipments/{id}/address:
+    put:
+      tags:
+        - Shipments
+      summary: 'Change address'
+      description: 'Change the address of a shipment'
+      operationId: changeAddress
+      parameters:
+        - name: id
+          in: path
+          description: ID of the shipment
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 100000000
+            maximum: 999999999
+      requestBody:
+          description: "New shipment address"
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOAddressChange'
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Success:
+                    type: boolean
+              examples:
+                    Boolean Response:
+                        value:
+                          true
+        '400':
+          description: 'InvalidInput: 	The max length of a field has been exceeded or the postal code is not covered by Nationex. The specific error message will be returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "Address1 length is too long"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
+components:
+  securitySchemes:
+    BasicAuth:     # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+  responses:
+      NotFound:
+        description: "ErrorCode 404: The specified resource was not found"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+      Unauthorized:
+        description: "ErrorCode 401: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+      Conflict:
+        description: "ErrorCode 409: The resource already exists"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+      InternalServerError:
+        description: "ErrorCode 500: There has been an unexpected error in our server"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+      InvalidInput:
+        description: "ErrorCode 400: There is some part of the input that is invalid"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          description: User's username
+          example: user123
+        password:
+          type: string
+          description: User's password
+          example: password123
+    DTOUser:
+      type: object
+      required:
+        - Username
+      properties:
+        Username:
+          type: string
+          description: User's username
+          example: User123
+        Password:
+          type: string
+          description: User's password
+          example: Password123
+        Email:
+          type: string
+          description: User's email
+          example: test@test.com
+    DTOParcelHistory:
+      type: object
+      properties:
+        ParcelHistoryId:
+          type: integer
+          format: int64
+          description: ID of the parcel history
+          example: 999999123456789
+        ProcessedDate:
+          type: string
+          format: date
+          description: Processed date of the parcel history
+          example: "2021-03-31"
+        ExceptionId:
+          type: integer
+          format: int32
+          description: ID of the exception code
+          example: 5.5
+        CityDepot:
+          type: string
+          #description: TODO : description
+        Description:
+          type: string
+          #description: TODO : description
+    DTOAccessory:
+      type: object
+      properties:
+        InsuranceAmount:
+          type: number
+          format: float
+          description: "Total price value to be insured"
+          maximum: 2500
+        FrozenProtection:
+          type: boolean
+          description: "Freezing protection"
+        DangerousGoods:
+          type: boolean
+          description: "Dangerous goods"
+        Before10h30am:
+          type: boolean
+          description: "Deliver before 10:30 AM service"
+        SNR:
+          type: boolean
+          description: "No signature required"
+        COD:
+          type: object
+          items:
+            $ref: '#/components/schemas/DTOCashOnDelivery'
+          example:
+            DTOCashOnDelivery:
+              CODType:
+                "Check"
+              CODAmount:
+                24.12
+    DTOCashOnDelivery:
+      type: object
+      properties:
+        CODType:
+          type: string
+          example: "Check"
+          enum: [NoCOD, Check, Cash, PostDatedCheck, CertifiedCheck]
+          description: "Type of Cash on delivery"
+        CODAmount:
+          type: number
+          format: float
+          example: 24.12
+          description: "Amount of cash on delivery"
+    DTODestination:
+      type: object
+      properties:
+        Contact:
+          type: string
+          description: Name of the person receiving the shipment
+          example: Sonia
+          maxLength: 50
+        AccountNumber:
+          type: string
+          description: Account Id used to identify and retrieve the consignee
+          example: NC33233
+          maxLength: 20
+        AccountName:
+          type: string
+          description: Consignee name
+          example: Coffee Shop
+          maxLength: 40
+        Address1:
+          type: string
+          description: First part of address, includes street number and street name
+          example: 433 Apple street
+          maxLength: 35
+        Address2:
+          type: string
+          description: Second part of address, optional
+          example: 3rd floor
+          maxLength: 35
+        PostalCode:
+          type: string
+          example: H2H2S2
+          maxLength: 6
+          #TODO : Pattern
+        City:
+          type: string
+          example: Montreal
+          maxLength: 35
+        ProvinceState:
+          type: string
+          example: QC
+          maxLength: 50
+        #CountryCode: TODO : include countrycode ?
+        #  type: string
+        #  description: ""
+        #NationexZone: TODO : include countrycode ?
+          #type: string
+          #description: TODO : description
+        Phone:
+          type: string #TODO: Regex ?
+          example: 4183776671
+          maxLength: 15
+        IsResidential:
+          type: boolean
+          example: true
+          #TODO : description
+          default: false
+        SmsNotification:
+          type: boolean
+          description: Enable or disable SMS notifications #TODO : Expand more info
+          example: true
+          default: false
+        EmailNotification:
+          type: boolean
+          description: Enable or disable Email notifications #TODO : Expand more info
+          example: true
+          default: false
+        NoCivic:
+          type: string
+          description: Civic address number or street number
+          example: 880
+          maxLength: 20
+        Apartment:
+          type: string
+          example: 400
+          maxLength: 30
+        StreetName:
+          type: string
+          description: Name of the street
+          example: Rue Claudia
+          maxLength: 50
+        #Language: todo: Language
+          #type: string
+          #description: TODO : description
+        Email:
+          type: string
+          example: example@gmail.com
+    DTOCustomerInfo:
+      type: object
+      properties:
+        CustomerId:
+          type: integer
+          format: int32
+          description: Nationex Customer Id (5 or 6 digits)
+          example: 113300
+        Name:
+          type: string
+          description: Customer Name
+          example: Nationex
+        ShortName:
+          type: string
+          description: Shorter customer name
+          example: Nationex
+        Address1:
+          type: string
+          description: First part of address, includes street number and street name
+          example: 433 Apple street
+        Address2:
+          type: string
+          description: Second part of address, optional
+          example: 3rd floor
+        City:
+          type: string
+          example: Montreal
+        Province:
+          type: string
+          example: QC
+        PostalCode:
+          type: string
+          example: H2H2S2
+        Phone:
+          type: string
+          example: 4183776671
+        Phone2:
+          type: string
+          example: 4183776671
+        Fax:
+          type: string
+          example: 4183776671
+        Language:
+          type: string
+          enum: [Undefined, Fr, En, Bi]
+        Active:
+          type: boolean
+          description: "False when the customer's account is closed"
+        MinWeight:
+          type: number
+          format: float
+          description: "Minimum  (lbs)"
+        Note:
+          type: string
+          description: "Customer note"
+    DTODimensions:
+      type: object
+      properties:
+        Height:
+          type: number
+          format: float
+          example: 6.5
+          description: "Height of the box in inches"
+        Length:
+          type: number
+          format: float
+          example: 12
+          description: "Length of the box in inches"
+        Width:
+          type: number
+          format: float
+          example: 8
+          description: "Width of the box in inches"
+    DTOParcelInfo:
+      type: object
+      properties:
+        ParcelId:
+          type: integer
+          format: int64
+          description: "11 digit number to identify the parcel"
+          example: 50133944801
+        ParcelNumber:
+          type: integer
+          format: int32
+          description: "Number of the parcel in the shipment, starting at 1"
+        NCV:
+          type: boolean
+          description: "Non conveyable. These are the criterias for non-conveyable items :
+-	At least one of the dimensions exceed 36 inches (91.5cm) or one of the two smallest dimensions exceeds 30 inches (76cm)
+-	Weight exceeds 70 lbs (32 kg)
+-	Identified as non-conveyable with stickers
+-	Is a bucket
+-	Hazardous materials identified as toxic, corrosive
+-	In bulk items like tires, display stands
+-	Objects wrapped in plastic or paper
+-	Bags or pouches"
+        Weight:
+          type: number
+          format: float
+          description: "Weight of the parcel (lbs)"
+        Dimensions:
+          $ref: '#/components/schemas/DTODimensions'
+        History:
+          type: array
+          items:
+            $ref: '#/components/schemas/DTOParcelHistory'
+        CustomerInfo:
+            $ref: '#/components/schemas/DTOCustomerInfo'
+        ShipmentInfo:
+            $ref: '#/components/schemas/DTOShipment'
+    DTOPrintPreference:
+      type: object
+      properties:
+        OutputFormat:
+          type: string
+          enum: [None, Format85x11, Format4x6]
+        PrintPhone:
+          type: boolean
+          description: "Show the phone number on the label"
+        HideAccountNumber:
+          type: boolean
+          description: "Hide the account number on the label"
+    DTOSender:
+      type: object
+      properties:
+        Contact:
+          type: string
+          description: Name of the person receiving the shipment
+          example: Sonia
+          maxLength: 50
+        AccountNumber:
+          type: string
+          description: Account Id used to identify and retrieve the consignee
+          example: NC33233
+          maxLength: 15
+        AccountName:
+          type: string
+          description: Consignee name
+          example: Coffee Shop
+          maxLength: 40
+        Address1:
+          type: string
+          description: First part of address, includes street number and street name
+          example: 433 Apple street
+          maxLength: 35
+        Address2:
+          type: string
+          description: Second part of address, optional
+          example: 3rd floor
+          maxLength: 35
+        PostalCode:
+          type: string
+          example: H2H2S2
+          maxLength: 6
+        City:
+          type: string
+          example: Montreal
+          maxLength: 35
+        ProvinceState:
+          type: string
+          example: QC
+          maxLength: 50
+        #CountryCode: TODO: Include country code ?
+        #  type: string
+          #description: TODO : description
+        #NationexZone: TODO : Include nationex zone ?
+        #  type: string
+          #description: TODO : description
+        Phone:
+          type: string
+          description: "Sender's phone number"
+          example: 555123456
+        IsResidential:
+          type: boolean
+        SmsNotification:
+          type: boolean
+          description: Enable or disable SMS notifications #TODO : Expand more info
+          example: true
+          default: false
+        EmailNotification:
+          type: boolean
+          description: Enabled or disables Email notifications #TODO : Expand more info
+          example: true
+          default: false
+        NoCivic:
+          type: string
+          description: Civic address number or street number
+          example: 880
+          maxLength: 20
+        Apartment:
+          type: string
+          example: 400
+          maxLength: 30
+        StreetName:
+          type: string
+          description: Name of the street
+          example: Rue Claudia
+          maxLength: 50
+        Email:
+          type: string
+          example: example@gmail.com
+    DTOShipment:
+      type: object
+      required:
+        - CustomerId
+        - ShipmentId
+        - ExpeditionDate
+        - TotalParcels
+        - TotalWeight
+        - Sender
+        - Destination
+        - Accessory
+        - Parcels
+        - PrintPreference
+      properties:
+        CustomerId:
+          type: integer
+          format: int32
+          description: Nationex Customer Id (5 or 6 digits)
+          example: 113300
+        ShipmentId:
+          type: integer
+          format: int32
+          description: Needs to be -1 for auto generation, 9 digits otherwise, used to identify and track the shipment
+          example: -1
+        ExpeditionDate:
+          type: string
+          format: date
+          description: The expedition date
+          example: "2021-03-30"
+        TotalParcels:
+          type: integer
+          format: int32
+          description: The quantity of parcels in the shipment
+          example: 2
+        TotalWeight:
+          type: integer
+          format: int32
+          description: Sum of weights of shipments (lbs)
+          example: 5.5
+        NbrShipped:
+          type: number
+          format: float
+          #description: TODO : description
+        ShipmentStatus:
+          type: number
+          format: float
+          #description: TODO : description
+        ShipmentType:
+          type: string
+          enum: [Delivery, Pickup, PickupDelivery]
+          example: Delivery
+          default: Delivery
+          #description: TODO : description
+        ReferenceNumber:
+          type: string
+          description: Reference number, string which can be used to track the shipment
+          example: CX4335
+        Note:
+          type: string
+          #description: TODO : description
+        CollectAccount:
+          type: integer
+          format: int32
+          description: Nationex Customer ID of the collect account if different from shipping account
+          example: 165556
+        SNR:
+          type: boolean
+          description: If signature is not required
+          example: false
+        Sender:
+          $ref: '#/components/schemas/DTOSender' 
+        Destination:
+          $ref: '#/components/schemas/DTODestination' 
+        Accessory:
+          $ref: '#/components/schemas/DTOAccessory'
+        Parcels:
+          type: array
+          items:
+            $ref: '#/components/schemas/DTOParcelInfo'
+        PrintPreference:
+            $ref: '#/components/schemas/DTOPrintPreference'
+        ConsolNo:
+          type: integer
+          format: int32
+          #description: TODO : description
+    DTOShipmentCreate:
+      type: object
+      required:
+        - CustomerId
+        - ShipmentId
+        - ExpeditionDate
+        - TotalParcels
+        - TotalWeight
+        - Destination
+      properties:
+        CustomerId:
+          type: integer
+          format: int32
+          description: Nationex Customer Id (5 or 6 digits)
+          example: 113300
+        ShipmentId:
+          type: string
+          description: Needs to be -1 for auto generation, 9 digits otherwise, used to identify and track the shipment
+          example: -1
+        ExpeditionDate:
+          type: string
+          format: date
+          description: The expedition date
+          example: "2021-03-30"
+        ShipmentType:
+          type: string
+          enum: [Delivery, Pickup, PickupDelivery]
+          example: Delivery
+          default: Delivery
+          #description: TODO : description
+        TotalParcels:
+          type: integer
+          format: int32
+          description: The quantity of parcels in the shipment
+          example: 2
+        TotalWeight:
+          type: integer
+          format: int32
+          description: Sum of weights of shipments (lbs)
+          example: 5.5
+        ReferenceNumber:
+          type: string
+          description: Reference number, string which can be used to track the shipment
+          example: CX4335
+        Note:
+          type: string
+          description: A Delivery Note
+          example: If no answer leave under the stairs
+        BillingAccount:
+          type: integer
+          format: int32
+          description: Nationex Customer ID of the billing account if different from shipping account
+          example: 165556
+        Sender:
+          $ref: '#/components/schemas/DTOSender'
+        Destination:
+          $ref: '#/components/schemas/DTODestination'
+        Accessory:
+          $ref: '#/components/schemas/DTOAccessory'
+        PrintPreference:
+          $ref: '#/components/schemas/DTOPrintPreference'
+    DTOShipmentCreated:
+      type: object
+      properties:
+        ShipmentId:
+          type: integer
+          format: int32
+          description: 9 digits number, used to identify and track the shipment
+          example: 501883938
+        ConsolId:
+          type: integer
+          format: int32
+          description: 9 digits number, ShipmentID of the consolidated shipment
+          example: 501883122
+        BillingAccount:
+          type: integer
+          format: int32
+          description: CustomerID being billed
+          example: 165556
+        ParcelIds:
+          type: array
+          items:
+            type: string
+          example: [50188393801, 50188393802]
+        PriceDetail:
+          $ref: '#/components/schemas/DTORatesDetail'
+        GeoCoding:
+          $ref: '#/components/schemas/DTOGeocoding'
+    DTOShipmentRatesRequest:
+      type: object
+      required:
+      - CustomerId
+      - DestinationPostalCode
+      properties:
+        CustomerId:
+            type: integer
+            format: int32
+            description: Nationex Customer Id (5 or 6 digits)
+            example: 113300
+        ExpeditionDate:
+            type: string
+            format: date
+            description: "The expedition or pickup date. Not required, but this will be used to calculate the fuel rate, which changes weekly. If blank, the current week's rate will be used."
+            example : "2021-03-31"
+        ShipmentType:
+          type: string
+          enum: [Delivery, Pickup, PickupDelivery]
+          example: Delivery
+          default: Delivery
+        SourcePostalCode:
+            type: string
+            description: Postal code of the origin
+            example: "J3Y5T7"
+        DestinationPostalCode:
+            type: string
+            description: Postal code of the destination
+            example: "H2H2S2"
+        TotalWeight:
+            type: number
+            format: float
+            description: Total weight of the shipment in pounds (lbs)
+            example: 12.20
+        TotalParcels:
+            type: integer
+            format: int32
+            description: Total amount of parcels in the shipment
+            example: 2
+        Accessories:
+            $ref: '#/components/schemas/DTOAccessory'
+        Parcels:
+          description: "Optional, can be used to provide weight and dimensions of individual parcels for a more accurate price"
+          type: array
+          items:
+            $ref: '#/components/schemas/DTORatesRequestParcel'
+    DTOConsignee:
+      type: object
+      required:
+      - CustomerId
+      - PostalCode
+      properties:
+        ConsigneeId:
+          type: integer
+          format: int64
+          description: Nationex Consignee Id, assigned by Nationex, used to update or delete the consignee
+          example: 21892729
+        CustomerId:
+          type: integer
+          format: int32
+          description: Nationex Customer Id (5 or 6 digits)
+          example: 113300
+          minimum: 10000
+          maximum: 999999
+        Account:
+          type: string
+          description: Account Id used to identify and retrieve the consignee
+          example: NC33233
+          maxLength: 15
+        Name:
+          type: string
+          description: Consignee name
+          example: Coffee Shop
+          maxLength: 40
+        Address1:
+          type: string
+          description: First part of address, includes street number and street name
+          example: 433 Apple street
+          maxLength: 35
+        Address2:
+          type: string
+          description: Second part of address, optional
+          example: 3rd floor
+          maxLength: 35
+        City:
+          type: string
+          example: Montreal
+          maxLength: 35
+        Province:
+          type: string
+          example: QC
+          maxLength: 50
+        PostalCode:
+          type: string
+          example: H2H2S2
+          maxLength: 6
+          #TODO : Pattern
+        Email:
+          type: string
+          example: example@gmail.com
+        Phone:
+          type: string #TODO: Regex ?
+          example: 4183776671
+          maxLength: 15
+        SMSNotification:
+          type: boolean
+          description: Enables or disable SMS notifications #TODO : Expand more info
+          example: true
+          default: false
+        EmailNotification:
+          type: boolean
+          description: Enabled or disables Email notifications #TODO : Expand more info
+          example: true
+          default: false
+        Contact:
+          type: string
+          description: Name of the person receiving the shipment
+          example: Sonia
+          maxLength: 50
+        Note:
+          type: string
+          description: A Delivery Note
+          example: If no answer leave under the stairs
+          maxLength: 100
+        NoCivic:
+          type: string
+          description: Civic address number or street number
+          example: 880
+          maxLength: 20
+        Apartment:
+          type: string
+          example: 400
+          maxLength: 30
+        Floor:
+          type: string
+          example: 2nd floor
+          maxLength: 50
+        StreetName:
+          type: string
+          description: Name of the street
+          example: Rue Claudia
+          maxLength: 50
+        IsResidential:
+          type: boolean
+          example: true
+          #TODO : description
+          default: false
+        ConsigneeCustomerIdLink:
+          type: integer
+          format: int32
+          #TODO : description
+          example: 165556
+        AutoCollect:
+          type: boolean
+          #TODO : description
+        # TODO : IsArchive ?
+          default: false
+        SNR:
+          type: boolean
+          description: No signature required if true
+          example: false
+          default: false
+        IsGroup:
+          type: boolean
+          #TODO : description
+          default: false
+        GroupId:
+          #TODO : description
+          example: ""
+          type: string
+        ConsigneeInGroupUniqueId:
+          #TODO : description
+          example: ""
+          type: string
+    DTOEconomaxPackageRenewal:
+      type: object
+      required:
+       - CustomerId
+       - Amount
+       - Gst
+       - Pst
+       - Hst
+      properties:
+        CustomerId:
+          type: integer
+          format: int32
+          description: Nationex Customer Id (5 or 6 digits)
+          example: 10288
+          minimum: 10000
+          maximum: 999999
+        Amount:
+          type: number
+          format: float
+          description: Renewal amount
+          #TODO : Restrictions ? more description ?
+          example: 200.00
+        Gst:
+          type: number
+          format: float
+          description: Renewal gst (Goods and Services Tax)
+          example: 11.33
+        Pst:
+          type: number
+          format: float
+          description: Renewal pst (Provincial Sales Tax)
+          example: 21.12
+        Hst:
+          type: number
+          format: float
+          description: Renewal hst (Harmonized Sales Tax)
+          example: 3.44
+    DTORatesDetail:
+      description: "Contains a shipment's rates details. Note : the example amounts are random number, they are not accurate"
+      type: object
+      properties:
+        BasePrice:
+          type: number
+          format: float
+          description: "Price without any tax or charges"
+          example: 47.22
+        SurchargeCharges:
+          description: "Special charges for excessive parcel length or remote areas"
+          # TODO : Examples
+          type: array
+          items:
+            $ref: '#/components/schemas/DTOSurchargeCharge'
+        TaxCharges:
+          description: "Federal and provincial tax rates and charges"
+          type: array
+          items:
+            $ref: '#/components/schemas/DTOTaxCharge'
+          #TODO: Examples
+        AccessoryCharges:
+          description: "Optionnal charges for extra services. Include Freezing protection, Dangerous goods, Special 10h30 service, COD and Insurance"
+          type: array
+          items:
+            $ref: '#/components/schemas/DTOAccessoryCharge'
+            #todo: Examples
+        NCVCharge:
+          type: number
+          format: float
+          description: "Non-Conveyable charge. These are the criterias for non-conveyable items :
+-  At least one of the dimensions exceed 36 inches (91.5cm) or one of the two smallest dimensions exceeds 30 inches (76cm)
+-  Weight exceeds 70 lbs (32 kg)
+-  Identified as non-conveyable with stickers
+-  Is a bucket
+-  Hazardous materials identified as toxic, corrosive
+-  In bulk items like tires, display stands
+-  Objects wrapped in plastic or paper
+-  Bags or pouches"
+          example: 4.00
+        FuelRate:
+          type: number
+          format: float
+          description: "Rate of fuel charge, varies week to week" #todo: specify if rate or percent
+          example: 0.1425
+        FuelCharge:
+          type: number
+          format: float
+          description: "Fuel charge"
+          example: 2.51
+        SubTotal:
+          type: number
+          format: float
+          description: "Includes baseprice and all charges except fuel and taxes"
+          example: 55.89
+        Total:
+          type: number
+          format: float
+          example: 61.12
+        TotalBillableWeight:
+          type: number
+          format: float
+          example: 0.00
+        BillingZone:
+          type: string
+          description: Nationex billing zone
+          example: "NL"
+        DelayTransitDays:
+          type: integer
+          format: int32
+          example: 2
+          description: "Transit delay in business days"
+    DTOTaxCharge:
+      description: "Name, rate and amount of tax"
+      type: object
+      properties:
+        Id:
+          type: string
+          example: "GST"
+        Charge:
+          type: number
+          format: float
+          description: "Amount charged"
+          example: 12.905
+        Rate:
+          type: number
+          format: float
+          description: "Current tax rate"
+        NameFr:
+          type: string
+          example: "TPS"
+        NameEn:
+          type: string
+          example: "GST"
+    DTOSurchargeCharge:
+      description: "Name, rate and amount of charge for excessive parcel length or remote areas"
+      type: object
+      properties:
+        Id:
+          type: string
+          example: "519"
+        Charge:
+          type: number
+          format: float
+          description: "Amount charged"
+          example: 21.211
+        BeyondId:
+          type: integer
+          format: int32
+          description: "Id of the beyond charge for remote areas"
+          example: 102
+        NameFr:
+          type: string
+          example: "Surcharge région éloignée"
+        NameEn:
+          type: string
+          example: "Beyond surcharge"
+    DTOAccessoryCharge:
+      description: "Optionnal charges for extra services. Include Freezing protection, Dangerous goods, Special 10h30 service, COD and Insurance"
+      type: object
+      properties:
+        Id:
+          type: string
+          example: "3"
+        Charge:
+          type: number
+          format: float
+          description: "Amount charged"
+          example: 36.545
+        NameFr:
+          type: string
+          example: "Matières dangereuses"
+        NameEn:
+          type: string
+          example: "Dangerous goods"
+    DTOGeocoding:
+      description: "Latitude and longitude"
+      type: object
+      properties:
+        Longitude:
+          type: number
+          format: float
+          example: -78.098725
+        Latitude:
+          type: number
+          format: float
+          example: 48.575377
+    DTOTransitDelay:
+      description: "Transit days estimation"
+      type: object
+      properties:
+        BusinessDays:
+          type: integer
+          format: int32
+          description: "Estimated number of business days for transit"
+          example: 1
+        DeliveryDate:
+          type: string
+          format: date
+          description: "Estimated date of delivery"
+          example: "2021-04-05"
+        TotalDays:
+          type: integer
+          format: int32
+          description: "Estimated totals days for transit including weekends and holidays"
+          example: 3
+    DTORatesRequestParcel:
+      type: object
+      properties:
+        NCV:
+          type: boolean
+          description: "Non conveyable. These are the criterias for non-conveyable items :
+-	At least one of the dimensions exceed 36 inches (91.5cm) or one of the two smallest dimensions exceeds 30 inches (76cm)
+-	Weight exceeds 70 lbs (32 kg)
+-	Identified as non-conveyable with stickers
+-	Is a bucket
+-	Hazardous materials identified as toxic, corrosive
+-	In bulk items like tires, display stands
+-	Objects wrapped in plastic or paper
+-	Bags or pouches"
+        Weight:
+          type: number
+          format: float
+          example: 15.5
+          description: "Weight of the parcel (only lbs supported)"
+        Dimensions:
+          $ref: '#/components/schemas/DTODimensions'
+    DTOConsigneeCreated:
+      type: object
+      properties:
+        ConsigneeId:
+          type: integer
+          format: int64
+          description: Id to retrieve and modify the consignee
+          example: 20102848
+    DTOLocation:
+      type: object
+      description: "Postal code availability information"
+      properties:
+        PostalCode:
+          type: string
+          example: "H2H2S2"
+          maxLength: 6
+        Enabled:
+          type: boolean
+          example: true
+          description: "Is served by Nationex"
+        CODAvailable:
+          type: boolean
+          example: true
+          description: "COD service is available"
+        PickupAvailable:
+          type: boolean
+          example: true
+          description: "Pickup service is available"
+        Before10h30Available:
+          type: boolean
+          example: true
+          description: "Before 10h30 AM delivery service is available"
+        City:
+          type: string
+          example: "Montreal"
+        Province:
+          type: string
+          example: "QC"
+        Zone:
+          type: string
+          example: "MTL"
+        BeyondId:
+          type: integer
+          example: "100"
+        DeliveryDays:
+          type: string
+          example: "12345"
+          description: "Days of week serviced by Nationex. 1 = Monday, 2 = Tuesday, etc."
+          #TODO : include weekends ?
+    DTOAddressChange:
+      type: object
+      description: "Contains the new address of the shipment"
+      properties:
+        ShipmentId:
+          type: integer
+          format: int32
+          minimum: 100000000
+          maximum: 999999999
+        Sender:
+          $ref: '#/components/schemas/DTOSender'
+        Destination:
+          $ref: '#/components/schemas/DTODestination'
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 400
+        message:
+          type: string
+          example: Address1 is too long.
+security:
+    - BasicAuth: []
