@@ -1875,16 +1875,20 @@ components:
         Language:
           type: string
           enum: [Undefined, Fr, En, Bi]
+          example: "Fr"
         Active:
           type: boolean
           description: "False when the customer's account is closed"
+          example: true
         MinWeight:
           type: number
           format: float
+          example: 5.0
           description: "Minimum  (lbs)"
         Note:
           type: string
           description: "Customer note"
+          example: "Déménagé/Moved"
     DTODimensions:
       type: object
       properties:
