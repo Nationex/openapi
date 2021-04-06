@@ -941,7 +941,7 @@ paths:
           name: count
           description: Number of consignees returned
           required: true
-          example: 1
+          example: 100
           schema:
             type: integer
             format: int32
