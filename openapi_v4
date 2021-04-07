@@ -42,21 +42,21 @@ paths:
             format: int32
         - name: tracking
           in: query
-          description: Returns tracking or not
+          description: Returns tracking (parcel history) or not
           example: true
           required: false
           schema:
             type: boolean
         - name: parcels
           in: query
-          description: Returns the parcels or not
+          description: Returns the parcel infos (weights & dimensions) or not
           example: true
           required: false
           schema:
             type: boolean
         - name: consol
           in: query
-          description: Returns the consolIds or not
+          description: Returns all consolidated shipments or not
           example: true
           required: false
           schema:
