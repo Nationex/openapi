@@ -246,7 +246,9 @@ paths:
           required: false
           schema:
             type: string
-          example: 4x6
+            enum: [Format4x6, Format85x11]
+            default: Format4x6
+          example: Format4x6
       responses:
         '200':
           description: 'Success'
