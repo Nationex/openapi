@@ -1942,8 +1942,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DTOParcelHistory'
-        CustomerInfo:
-            $ref: '#/components/schemas/DTOCustomerInfo'
         ShipmentInfo:
             $ref: '#/components/schemas/DTOShipment'
     DTOPrintPreference:
