@@ -417,9 +417,9 @@ paths:
             schema:
               $ref: '#/components/schemas/DTOUser'
             example:
-              username: username123
-              email: test@test.com
-              password: xhsu338h2gs
+              Username: username123
+              Email: test@test.com
+              Password: xhsu338h2gs
       security: [] # no authentication
       responses:
         '200':
