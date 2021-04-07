@@ -419,6 +419,7 @@ paths:
             example:
               username: username123
               email: test@test.com
+              password: xhsu338h2gs
       security: [] # no authentication
       responses:
         '200':
