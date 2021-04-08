@@ -2133,7 +2133,8 @@ components:
           description: Nationex Customer Id (5 or 6 digits)
           example: 113300
         ShipmentId:
-          type: string
+          type: integer
+          format: int32
           description: Needs to be -1 for auto generation, 9 digits otherwise, used to identify and track the shipment
           example: -1
           default: -1
