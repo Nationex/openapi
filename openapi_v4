@@ -2092,7 +2092,7 @@ components:
         Note:
           type: string
           #description: TODO : description
-        CollectAccount:
+        BillingAccount:
           type: integer
           format: int32
           description: Nationex Customer ID of the collect account if different from shipping account
