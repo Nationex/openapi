@@ -2136,6 +2136,7 @@ components:
           type: string
           description: Needs to be -1 for auto generation, 9 digits otherwise, used to identify and track the shipment
           example: -1
+          default: -1
         ExpeditionDate:
           type: string
           format: date
