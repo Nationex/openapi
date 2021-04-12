@@ -937,7 +937,6 @@ paths:
             type: integer
             format: int32
             maximum: 5000
-            default: 1000
         - in: query
           name: includeArchived
           description: If true, also return the consignees that have been deleted
