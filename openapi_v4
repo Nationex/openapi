@@ -1141,7 +1141,8 @@ paths:
           example: pdf
           schema:
             type: string
-            format: '/^(pdf|xlsx)$/'
+            enum: [xlsx, pdf]
+            default: pdf
       security:
         - BasicAuth: []
       responses:
