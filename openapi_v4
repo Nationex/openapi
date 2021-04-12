@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: '4.0'
   title: Nationex API
-  description: Nationex API
+  description: Nationex API !
   contact:
     email: tech@nationex.com
     url: https://nationex.com
