@@ -718,11 +718,10 @@ paths:
           name: consigneeId
           description: Consignee Id used to identify and retrieve the consignee, also known as Account Id
           required: true
-          example: MXD29192
+          example: 234423
           schema:
-            type: string
-            minLength: 1
-            maxLength: 15
+            type: integer
+            format: int64
       security:
         - BasicAuth: []
       responses:
@@ -789,11 +788,11 @@ paths:
           name: consigneeId
           description: Consignee Id used to identify and retrieve the consignee, also known as Account Id
           required: true
-          example: MXD29192
+          example: 234553
           schema:
             type: string
-            minLength: 1
-            maxLength: 15
+            type: integer
+            format: int64
       requestBody:
           description: Consignee to modify
           required: true
@@ -865,11 +864,11 @@ paths:
           name: consigneeId
           description: Consignee Id used to identify and retrieve the consignee, also known as Account Id
           required: true
-          example: MXD29192
+          example: 234644
           schema:
             type: string
-            minLength: 1
-            maxLength: 15
+            type: integer
+            format: int64
       security:
         - BasicAuth: []
       responses:
