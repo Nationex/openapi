@@ -1480,11 +1480,12 @@ paths:
           name: page
           description: Page iterator
           required: true
-          example: 1
+          example: 0
           schema:
             type: integer
             format: int32
-            minimum: 1
+            minimum: 0
+            default: 0
         - in: query
           name: count
           description: "Locations count"
