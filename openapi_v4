@@ -721,7 +721,7 @@ paths:
           example: 234423
           schema:
             type: integer
-            format: int32
+            format: int64
       security:
         - BasicAuth: []
       responses:
@@ -790,9 +790,8 @@ paths:
           required: true
           example: 234553
           schema:
-            type: string
             type: integer
-            format: int32
+            format: int64
       requestBody:
           description: Consignee to modify
           required: true
@@ -866,9 +865,8 @@ paths:
           required: true
           example: 234644
           schema:
-            type: string
             type: integer
-            format: int32
+            format: int64
       security:
         - BasicAuth: []
       responses:
