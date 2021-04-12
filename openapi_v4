@@ -921,12 +921,13 @@ paths:
             maximum: 999999
         - in: query
           name: paging
-          description: Page number starting at 1
+          description: Page number starting at 0
           required: true
-          example: 1
+          example: 0
           schema:
             type: integer
             format: int32
+            default: 0
         - in: query
           name: count
           description: Number of consignees returned
@@ -936,6 +937,7 @@ paths:
             type: integer
             format: int32
             maximum: 5000
+            default: 1000
         - in: query
           name: includeArchived
           description: If true, also return the consignees that have been deleted
