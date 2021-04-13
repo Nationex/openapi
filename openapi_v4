@@ -67,7 +67,7 @@ paths:
                 code: 401
                 message: "Invalid key"
         '409':
-          description: 'Conflict: The ShipmentId already exists'
+          description: 'Conflict: The ShipmentId already exists. Can only happen if shipmentId is provided by user (shipmentId != -1)'
           content:
             application/json:
               schema:
