@@ -2085,6 +2085,7 @@ components:
           example: CX4335
         Note:
           type: string
+          maxLength: 100
           #description: TODO : description
         BillingAccount:
           type: integer
@@ -2163,6 +2164,7 @@ components:
           type: string
           description: A Delivery Note
           example: If no answer leave under the stairs
+          maxLength: 100
         BillingAccount:
           type: integer
           format: int32
