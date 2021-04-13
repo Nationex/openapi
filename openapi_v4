@@ -2240,8 +2240,10 @@ components:
         TotalParcels:
             type: integer
             format: int32
-            description: Total amount of parcels in the shipment
+            description: The quantity of parcels in the shipment. Cannot exceed 99.
             example: 2
+            minimum: 1
+            maximum: 99
         Accessories:
             $ref: '#/components/schemas/DTOAccessory'
         Parcels:
