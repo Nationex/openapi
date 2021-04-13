@@ -1819,6 +1819,7 @@ components:
           #description: TODO : description
         Email:
           type: string
+          maxLength: 255
           example: example@gmail.com
     DTOCustomerInfo:
       type: object
