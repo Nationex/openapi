@@ -2226,8 +2226,6 @@ components:
           example: [50188393801, 50188393802]
         PriceDetail:
           $ref: '#/components/schemas/DTORatesDetail'
-        GeoCoding:
-          $ref: '#/components/schemas/DTOGeocoding'
     DTOShipmentRatesRequest:
       type: object
       required:
