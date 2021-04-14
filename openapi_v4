@@ -1,5 +1,18 @@
 openapi: 3.0.0
 info:
+  description: |
+    Welcome to our Nationex integration API.
+    All of Nationex's APIS are organized around REST. If you’ve used RESTful APIs before, many of the concepts here will be familiar to you. 
+    Each resource has a unique URL, and HTTP verbs are used to specify actions you want to perform on each resource. 
+    All request and response bodies, including errors, are encoded in JSON.
+
+    # Introduction
+    Here’s what you can do with our APIs –
+    - Create, update, cancel shipment.
+    - Get shipment rates.
+    - Get shipment manifest.
+    - Print labels.
+    - Get Shipment current status.
   version: '4.0'
   title: Nationex API
   contact:
