@@ -13,6 +13,10 @@ info:
     - Get shipment manifest.
     - Print labels.
     - Get Shipment current status.
+    # Authentication
+    Nationex Restfull API needs authentication:
+      - Basic
+    <SecurityDefinitions />
   version: '4.0'
   title: Nationex API
   contact:
@@ -1727,7 +1731,9 @@ components:
           type: boolean
           description: "No signature required"
         COD:
-          $ref: '#/components/schemas/DTOCashOnDelivery'
+          type: object
+          items:
+            $ref: '#/components/schemas/DTOCashOnDelivery'
           example:
             DTOCashOnDelivery:
               CODType:
