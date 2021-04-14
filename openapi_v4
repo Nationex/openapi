@@ -2094,7 +2094,7 @@ components:
           #description: TODO : description
         ShipmentType:
           type: string
-          enum: [Delivery, Pickup, PickupDelivery]
+          enum: [Delivery, PickupReturn, PickupDelivery]
           example: Delivery
           default: Delivery
           #description: TODO : description
@@ -2159,7 +2159,7 @@ components:
           example: "2021-03-30"
         ShipmentType:
           type: string
-          enum: [Delivery, Pickup, PickupDelivery]
+          enum: [Delivery, PickupReturn, PickupDelivery]
           example: Delivery
           default: Delivery
           description: A delivery is a shipment with the Nationex Customer as origin and Consignee as destination
@@ -2240,7 +2240,7 @@ components:
             example : "2021-03-31"
         ShipmentType:
           type: string
-          enum: [Delivery, Pickup, PickupDelivery]
+          enum: [Delivery, PickupReturn, PickupDelivery]
           example: Delivery
           default: Delivery
         SourcePostalCode:
