@@ -1727,9 +1727,7 @@ components:
           type: boolean
           description: "No signature required"
         COD:
-          type: object
-          items:
-            $ref: '#/components/schemas/DTOCashOnDelivery'
+          $ref: '#/components/schemas/DTOCashOnDelivery'
           example:
             DTOCashOnDelivery:
               CODType:
