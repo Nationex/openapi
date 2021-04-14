@@ -1754,6 +1754,8 @@ components:
           type: number
           format: float
           example: 24.12
+          default: 0
+          maximum: 50000
           description: "Amount of cash on delivery"
     DTODestination:
       type: object
