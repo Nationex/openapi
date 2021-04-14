@@ -9,7 +9,6 @@ info:
 	All request and response bodies, including errors, are encoded in JSON.
     # Introduction
 	Here’s what you can do with our APIs –
-
 	- Create, update, cancel shipment.
 	- Get shipment rates.
 	- Get shipment manifest.
