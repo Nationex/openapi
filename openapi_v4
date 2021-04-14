@@ -2088,10 +2088,6 @@ components:
           format: int32
           description: Sum of weights of shipments (lbs)
           example: 5.5
-        NbrShipped:
-          type: number
-          format: float
-          #description: TODO : description
         ShipmentStatus:
           type: number
           format: float
