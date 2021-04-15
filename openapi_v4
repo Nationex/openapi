@@ -1966,7 +1966,7 @@ components:
           description: "Weight of the parcel (lbs)"
         Status:
           type: string
-          enum: [DataReceived, InTransit, InRoute, AwaitingPickup, OnHold, Cancelled, Completed, SentToPartner]
+          enum: [DataReceived, InTransit, OutForDelivery, AwaitingPickup, OnHold, Cancelled, Completed, SentToPartner]
         StatusDescriptionEn:
           type: string
           description: 'Description of Status in english'
