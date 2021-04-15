@@ -2176,8 +2176,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DTOParcelInfo'
-        PrintPreference:
-            $ref: '#/components/schemas/DTOPrintPreference'
         ConsolNo:
           type: integer
           format: int32
