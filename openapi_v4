@@ -1953,8 +1953,12 @@ components:
           enum: [DataReceived, InTransit, InRoute, AwaitingPickup, OnHold, Cancelled, Completed, SentToPartner]
         StatusDescriptionEn:
           type: string
+          description: 'Description of Status in english'
+          example: 'In transit'
         StatusDescriptionFr:
           type: string
+          description: 'Description of Status in french'
+          example : 'En transit'
         EstimatedDeliveryDate:
           type: string
           format: date
