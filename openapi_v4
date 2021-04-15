@@ -1721,7 +1721,7 @@ components:
           type: integer
           format: int64
           description: 'Id of the photo image, found in DTOShipment'
-          example: 21000283
+          example: 18840452
         SignatureId:
           type: integer
           format: int64
