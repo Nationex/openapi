@@ -2716,6 +2716,16 @@ components:
           $ref: '#/components/schemas/DTOSender'
         Destination:
           $ref: '#/components/schemas/DTODestination'
+    DTOPhoto:
+      type: object
+      description: "Contains the Id of the picture or signature and Base64 string data"
+      properties:
+        Id:
+          type: integer
+          format: int64
+        Data:
+          type: string
+          format: byte
     Error:
       type: object
       required:
