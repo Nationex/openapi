@@ -2723,6 +2723,7 @@ components:
         Id:
           type: integer
           format: int64
+          description: 'Contains either PhotoId or SignatureId'
         Data:
           type: string
           format: byte
