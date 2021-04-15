@@ -2143,9 +2143,18 @@ components:
           description: Sum of weights of shipments (lbs)
           example: 5.5
         ShipmentStatus:
-          type: number
-          format: float
-          #description: TODO : description
+          type: string
+          enum: [DataReceived, InTransit, OutForDelivery, AwaitingPickup, OnHold, Cancelled, Completed]
+          description: "Global status of the entire shipment"
+          example: 'DataReceived'
+        ShipmentStatusFr:
+          type: string
+          description: "Readable ShipmentStatus in french"
+          example: "Données reçues"
+        ShipmentStatusEn:
+          type: string
+          description: "Readable ShipmentStatus in english"
+          example: "Data received"
         ShipmentType:
           type: string
           enum: [Delivery, PickupReturn, PickupDelivery]
@@ -2158,8 +2167,9 @@ components:
           example: CX4335
         Note:
           type: string
+          description: A Delivery Note
+          example: If no answer leave under the stairs
           maxLength: 100
-          #description: TODO : description
         BillingAccount:
           type: integer
           format: int32
