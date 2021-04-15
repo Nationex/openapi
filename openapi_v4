@@ -1948,6 +1948,30 @@ components:
           type: number
           format: float
           description: "Weight of the parcel (lbs)"
+        Status:
+          type: string
+          enum: [DataReceived, InTransit, InRoute, AwaitingPickup, OnHold, Cancelled, Completed, SentToPartner]
+        StatusDescriptionEn:
+          type: string
+        StatusDescriptionFr:
+          type: string
+        EstimatedDeliveryDate:
+          type: string
+          format: date
+          description: 'Live estimated date of delivery'
+          example: '2021-04-16'
+        EstimatedDeliveryTime:
+          type: string
+          description: 'Live estimated time of delivery (only available during day of delivery), does not include margin of error'
+          example: '13:15'
+        EstimatedDeliveryTimeFr:
+          type: string
+          description: 'Readable EstimatedTime in french'
+          example: 'Entre 12:45 et 13:45'
+        EstimatedDeliveryTimeEn:
+          type: string
+          description: 'Readable EstimatedTime in english'
+          example: 'Between 12:45 and 13:45'
         Dimensions:
           $ref: '#/components/schemas/DTODimensions'
         History:
