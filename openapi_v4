@@ -1688,28 +1688,44 @@ components:
           example: test@test.com
     DTOParcelHistory:
       type: object
+      description: 'Event of a single parcel'
       properties:
         ParcelHistoryId:
           type: integer
           format: int64
-          description: ID of the parcel history
-          example: 999999123456789
+          description: 'ID of the parcel history'
+          example: 3049373748
         ProcessedDate:
           type: string
-          format: date
-          description: Processed date of the parcel history
-          example: "2021-03-31"
+          format: date-time
+          description: 'Date time of the event'
+          example: "2021-03-31 13:31:00" #TODO : Exact format
         ExceptionId:
           type: integer
           format: int32
-          description: ID of the exception code
-          example: 5.5
+          description: 'ID of the exception code'
+          example: 5
         CityDepot:
           type: string
-          #description: TODO : description
-        Description:
+          description: 'Name of the city of the depot where the event occured'
+          example: 'Blainville'
+        DescriptionFr:
           type: string
-          #description: TODO : description
+          description: 'Description of parcel history in french'
+          example: 'Destinataire indisponible - Tentative de livraison le jour ouvrable suivant'
+        DescriptionEn:
+          type: string
+          description: 'Description of parcel history in english'
+          example: 'Unavailable consignee - Delivery attempt on next business day'
+        PhotoId:
+          type: integer
+          format: int64
+          description: 'Id of the photo image, found in DTOShipment'
+          example: 21000283
+        SignatureId:
+          type: integer
+          format: int64
+          description: 'Id of the signature image, found in DTOShipment'
     DTOAccessory:
       type: object
       properties:
