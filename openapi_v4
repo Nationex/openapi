@@ -139,6 +139,13 @@ paths:
           required: false
           schema:
             type: boolean
+        - name: images
+          in: query
+          description: Returns all photos and signatures of the shipment
+          example: true
+          required: false
+          schema:
+            type: boolean
       responses:
         '200':
           description: 'Details about a shipment by ID'
