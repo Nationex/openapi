@@ -2124,7 +2124,7 @@ components:
           type: integer
           format: int32
           description: Needs to be -1 for auto generation, 9 digits otherwise, used to identify and track the shipment
-          example: -1
+          example: 103882774
         ExpeditionDate:
           type: string
           format: date
@@ -2165,10 +2165,6 @@ components:
           format: int32
           description: Nationex Customer ID of the collect account if different from shipping account
           example: 165556
-        SNR:
-          type: boolean
-          description: If signature is not required
-          example: false
         Sender:
           $ref: '#/components/schemas/DTOSender' 
         Destination:
@@ -2179,10 +2175,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DTOParcelInfo'
-        ConsolNo:
+        ConsolId:
           type: integer
           format: int32
-          #description: TODO : description
+          description: 'Id of the consolidated shipment. Corresponds to the lowest ShipmentId of the shipments going to the same address, same day'
+          example: 103882771
+        Photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/DTOPhoto'
+          description: "Signatures and photos. Linked with the PhotoId's and SignatureId's from DTOParcelHistory"
     DTOShipmentCreate:
       type: object
       description: "Request object to create a shipment. For a Delivery and PickupDelivery type, Destination is required. For a PickupReturn and PickupDelivery type, Sender is required. Otherwise it is the customer's address by default"
@@ -2258,7 +2260,7 @@ components:
         ConsolId:
           type: integer
           format: int32
-          description: 9 digits number, ShipmentID of the consolidated shipment
+          description: 'Id of the consolidated shipment. Corresponds to the lowest ShipmentId of the shipments going to the same address, same day'
           example: 501883122
         BillingAccount:
           type: integer
