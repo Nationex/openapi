@@ -1944,6 +1944,11 @@ components:
           format: float
           example: 8
           description: "Width of the box in inches"
+        Cubing:
+          type: number
+          format: float
+          example: 2.6
+          description: "Volume of the parcel in cubic foot. Calculated with 'Width * Height * Length) / 1728'"
     DTOParcelInfo:
       type: object
       properties:
