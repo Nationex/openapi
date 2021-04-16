@@ -401,6 +401,22 @@ paths:
             type: string
             format: date
           example: "2018-06-01"
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: "1"
+        - name: size
+          in: query
+          description: Number of results per page
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: "20"
       responses:
         '200':
           description: 'Success'
