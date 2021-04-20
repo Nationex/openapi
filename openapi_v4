@@ -55,13 +55,7 @@ servers:
         default: Development
         enum:
           - Production
-          - Developement
-      version:
-        default: "4"
-        enum:
-          - "4"
-  - url: 'http://localhost:56000/v{version}'
-    variables:
+          - Development
       version:
         default: "4"
         enum:
