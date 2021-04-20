@@ -25,11 +25,18 @@ info:
       Basic authentication is a simple authentication scheme built into the HTTP protocol. The client sends HTTP requests with the Authorization header that contains the word Basic word followed by a space and a base64-encoded string username:password. For example, to authorize as demo / p@55w0rd the client would send Authorization: Basic ZGVtbzpwQDU1dzByZA==
     <SecurityDefinitions />
     # Response code
-      | Status Code | Description | Note |
+    | Status Code | Description | Note |
+      |---|----|----|
       | `200` |  OK - The request was successful (some API calls may return 201 instead on `PUT`).|  <ul><li>GET request returns a representation of the requested entity.</li><li>The body of other requests will be a Status entity.</li></ul>|
-      
-    
-    <ul><li>GET request returns a representation of the requested entity.</li><li>The body of other requests will be a Status entity.</li></ul> \n`201` | Created - The request was successful and a resource was created. |<ul><li>This cannot happen on GET or DELETE requests.</li><li>This will happen on POST and may happen on PUT requests. </li><li> The response sets the `Location` header to the URI for the created resource.</li><li>The body of the response is **empty **at the exception of [Create Shipment](#operation/Shipment_Create).</li></ul>\n`204` | No Content | <ul><li>The request was successful but there is no representation to return (that is, the response is empty). </li></ul>\n`400` | Bad Request |  <ul><li>The request is invalid the body was missing required parameters and or parameter did not respect data validation see error messages in body.</li></ul>\n`401` | Unauthorized | <ul><li>Client authentication failed (invalid **user/password**). </li></ul> \n`403` | Forbidden | <ul><li>Access denied due to missing **Roles** or **Permissions**</li></ul>\n`404` | Not Found |  <ul><li>No resource was found at this location (URI)</li><li>If the requested URL contains an **ID** , this means that we did not find anything matching the ID</li></ul> \n`405` | Method Not Allowed | <ul><li>Requested method is not supported for the specified resource. </li></ul>\n`406` | Not Acceptable | <ul><li>Request contains **Bad headers** for this request</li></ul>\n`5xx` | Server-Side Error | <ul><li>These codes should not be set programmatically and are reserved for unexpected errors. </li></ul>
+      | `201`|  Created - The request was successful and a resource was created. |<ul><li>This cannot happen on GET or DELETE requests.</li><li>This will happen on POST and may happen on PUT requests. </li><li> The response sets the `Location` header to the URI for the created resource.</li><li>The body of the response is **empty **at the exception of [Create Shipment](#operation/Shipment_Create).</li></ul>
+      |`204` | No Content | <ul><li>The request was successful but there is no representation to return (that is, the response is empty). </li></ul>|
+      |`400` | Bad Request |  <ul><li>The request is invalid the body was missing required parameters and or parameter did not respect data validation see error messages in body.</li></ul>|
+      |`401` | Unauthorized | <ul><li>Client authentication failed (invalid **user/password**). </li></ul> |
+      |`403` | Forbidden | <ul><li>Access denied due to missing **Roles** or **Permissions**</li></ul>|
+      |`404` | Not Found | <ul><li>No resource was found at this location (URI)</li><li>If the requested URL contains an **ID** , this means that we did not find anything matching the ID</li></ul>|
+      |`405` | Method Not Allowed | <ul><li>Requested method is not supported for the specified resource. </li></ul>|
+      |`406` | Not Acceptable | <ul><li>Request contains **Bad headers** for this request</li></ul>|
+      |`5xx` | Server-Side Error | <ul><li>These codes should not be set programmatically and are reserved for unexpected errors. </li></ul>|
   version: '4.0'
   title: Nationex API
   contact:
