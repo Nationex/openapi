@@ -113,12 +113,14 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of the shipment
+          description: ID of the shipment (9 digits)
           required: true
           example: 103456020
           schema:
             type: integer
             format: int32
+            minimum: 100000000
+            maximum: 999999999
         - name: tracking
           in: query
           description: Returns tracking (parcel history) or not
