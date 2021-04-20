@@ -115,6 +115,7 @@ paths:
           in: path
           description: ID of the shipment
           required: true
+          example: 103456020
           schema:
             type: integer
             format: int32
