@@ -17,7 +17,7 @@ info:
     # API version
     We release new versions when we make backwards-incompatible changes to our APIs. The current version of our APIs is v4, so the base URL will always look something like this –
 
-    https://<your API host>/v4/
+    https://apidev.nationex.com/v4/
 
     # Authentication
     Nationex Restfull API needs authentication:
@@ -32,7 +32,7 @@ info:
         <th> Note</th>
       </tr>
       <tr>
-        <td> **200**</td>
+        <td> `200`</td>
         <td>  OK - The request was successful (some API calls may return 201 instead on `PUT`).</td>
         <td> - Get
              - PUT</td>
