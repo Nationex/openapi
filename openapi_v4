@@ -32,7 +32,7 @@ info:
         <th> Note</th>
       </tr>
       <tr>
-        <td> '200'</td>
+        <td> **200**</td>
         <td>  OK - The request was successful (some API calls may return 201 instead on `PUT`).</td>
         <td> - Get
              - PUT</td>
