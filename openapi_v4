@@ -9,10 +9,10 @@ info:
     # Introduction
     Here’s what you can do with our APIs 
     - Create, update, cancel shipment.
+    - Get shipment current status.
     - Get shipment rates.
     - Get shipment manifest.
-    - Print labels.
-    - Get Shipment current status.
+    - Get labels.
 
     # API version
     We release new versions when we make backwards-incompatible changes to our APIs.
