@@ -7,7 +7,7 @@ info:
     All request and response bodies, including errors, are encoded in JSON.
 
     # Introduction
-    Here’s what you can do with our APIs 
+    Here’s what you can do with our APIs :
     - Create, update, cancel shipment.
     - Get shipment current status.
     - Get shipment rates.
@@ -36,7 +36,7 @@ info:
       |`204` | No Content | <ul><li>The request was successful but there is no representation to return (that is, the response is empty). </li></ul>|
       |`400` | Bad Request |  <ul><li>The request is invalid the body was missing required parameters and or parameter did not respect data validation see error messages in body.</li></ul>|
       |`401` | Unauthorized | <ul><li>Client authentication failed (invalid **user/password**). </li></ul> |
-      |`403` | Forbidden | <ul><li>Access denied due to missing **Roles** or **Permissions**</li></ul>|
+      |`403` | Forbidden | <ul><li>Access denied due to missing **Permissions**</li></ul>|
       |`404` | Not Found | <ul><li>No resource was found at this location (URI)</li><li>If the requested URL contains an **ID** , this means that we did not find anything matching the ID</li></ul>|
       |`405` | Method Not Allowed | <ul><li>Requested method is not supported for the specified resource. </li></ul>|
       |`406` | Not Acceptable | <ul><li>Request contains **Bad headers** for this request</li></ul>|
@@ -2203,7 +2203,7 @@ components:
           example: CX4335
         Note:
           type: string
-          description: A Delivery Note
+          description: A delivery driver note, this will be print on the label.
           example: If no answer leave under the stairs
           maxLength: 100
         BillingAccount:
