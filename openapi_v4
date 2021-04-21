@@ -274,6 +274,14 @@ paths:
           schema:
             type: integer
             format: int32
+        - name: language
+          in: query
+          required: true
+          description: Language of the report
+          schema:
+            type: string
+            enum: [Fr, En]
+          example: Fr
         - name: consol
           in: query
           description: Returns the consolIds or not
