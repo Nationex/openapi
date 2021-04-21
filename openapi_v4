@@ -2466,7 +2466,7 @@ components:
           description: Civic address number or street number
           example: 880
           maxLength: 20
-        Apartment:
+        Suite:
           type: string
           example: 400
           maxLength: 30
