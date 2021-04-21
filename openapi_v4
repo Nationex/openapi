@@ -683,7 +683,7 @@ paths:
                 $ref: '#/components/responses/InvalidInput'
               example: 
                 code: 400
-                message: "The postal code A0A0A7 is not served by Nationex"
+                message: "The postal code 'A0A0A7' is not served by Nationex"
         '401':
           description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
           content:
