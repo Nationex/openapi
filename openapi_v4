@@ -2785,6 +2785,19 @@ components:
           $ref: '#/components/schemas/DTOSender'
         Destination:
           $ref: '#/components/schemas/DTODestination'
+    DTOUserLogin:
+      type: object
+      required:
+        - CustomerId
+      properties:
+        CustomerId:
+          type: integer
+          description: User's customer id
+          example: 123
+        WebUserApiToken:
+          type: string
+          description: User's api token
+          example: ABCDEFGHIJKLMNOPQRSTUVWXYZ
     DTOPhoto:
       type: object
       description: "Contains the Id of the picture or signature and Base64 string data"
