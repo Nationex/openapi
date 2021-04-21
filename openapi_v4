@@ -262,7 +262,7 @@ paths:
     get:
       tags:
         - Shipments
-      summary: 'Get tracking PDF'
+      summary: 'Get shipment status report'
       description: 'Returns details about a particular shipment in PDF'
       operationId: getReports
       parameters:
