@@ -133,7 +133,7 @@ paths:
           in: path
           description: ID of the shipment (9 digits)
           required: true
-          example: 103456020
+          example: 999999999
           schema:
             type: integer
             format: int32
@@ -269,7 +269,7 @@ paths:
         - name: id
           in: path
           description: ID of the shipment
-          example: 123456
+          example: 999999999
           required: true
           schema:
             type: integer
