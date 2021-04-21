@@ -339,6 +339,8 @@ paths:
           required: false
           schema:
             type: string
+            enum: [PDF]
+            default: PDF
         - name: orientation
           in: query
           description: Orientation of the file
@@ -346,15 +348,17 @@ paths:
           required: false
           schema:
             type: string
+            enum: [portrait]
+            default: portrait
         - name: format
           in: query
           description: Page format of the file
           required: false
           schema:
             type: string
-            enum: [Format4x6, Format85x11]
-            default: Format4x6
-          example: Format4x6
+            enum: [4x6, 85x11]
+            default: 4x6
+          example: 4x6
       responses:
         '200':
           description: 'Success'
