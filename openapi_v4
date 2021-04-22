@@ -2341,7 +2341,7 @@ components:
           items:
             type: string
           example: [50188393801, 50188393802]
-        PriceDetail:
+        RatesDetail:
           $ref: '#/components/schemas/DTORatesDetail'
     DTOShipmentRatesRequest:
       type: object
