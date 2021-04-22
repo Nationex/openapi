@@ -411,6 +411,14 @@ paths:
       description: 'Returns the list of shipment'
       operationId: getListShipment
       parameters:
+        - name: customerId
+          in: path
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema: 
+            type: integer
+            format: int32
         - name: search
           in: query
           description: Query string for search
