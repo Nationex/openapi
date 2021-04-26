@@ -1608,13 +1608,13 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-  /Shipments/{id}/address:
+  /Shipments/{id}:
     put:
       tags:
         - Shipments
-      summary: 'Change address'
-      description: 'Change the address of a shipment'
-      operationId: changeAddress
+      summary: 'Update shipment'
+      description: 'Update Address, SNR or notes of a shipment'
+      operationId: updateShipment
       parameters:
         - name: id
           in: path
@@ -1626,12 +1626,12 @@ paths:
             minimum: 100000000
             maximum: 999999999
       requestBody:
-          description: "New shipment address"
+          description: "shipment info"
           required: true
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DTOAddressChange'
+                $ref: '#/components/schemas/DTOShipmentCreate'
       responses:
         '200':
           description: 'Success'
