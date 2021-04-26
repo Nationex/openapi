@@ -494,7 +494,7 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-  /Users/login:
+  
     post:
       tags:
         - Users
@@ -545,7 +545,7 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-  /Users/:
+  
     put:
       tags:
         - Users
