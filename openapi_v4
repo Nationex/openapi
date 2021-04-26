@@ -1608,7 +1608,7 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-  /Shipments/{id}:
+  /Shipments/{id}/update:
     put:
       tags:
         - Shipments
