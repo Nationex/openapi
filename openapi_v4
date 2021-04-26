@@ -600,7 +600,7 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-  /Customers/{id}/:
+  
     get:
       tags:
         - Customers
