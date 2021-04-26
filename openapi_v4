@@ -12,7 +12,7 @@ info:
     - Get shipment current status.
     - Get shipment rates.
     - Get shipment manifest.
-    - Get labels.
+    - Get labels. 
 
     # API version
     We release new versions when we make backwards-incompatible changes to our APIs.
@@ -1608,7 +1608,7 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-  /Shipments/{id}/update:
+  /Shipments/{id}:
     put:
       tags:
         - Shipments
