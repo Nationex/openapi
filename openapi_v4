@@ -271,15 +271,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DTOShipmentCreate'
+                $ref: '#/components/schemas/DTOShipment'
       responses:
         '200':
-          description: 'Ok'
+          description: 'Success'
           #headers TODO : Include headers
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DTOShipmentCreated'
+                type: object
+                properties:
+                  Success:
+                    type: boolean
+              examples:
+                    Boolean Response:
+                        value:
+                          true
         '400':
           description: 'InvalidInput: 	The max length of a field has been exceeded or the postal code is not covered by Nationex. The specific error message will be returned'
           content:
