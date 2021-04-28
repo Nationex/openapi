@@ -1336,18 +1336,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DTOParcelHistory'
-    DTOPrintPreference:
-      type: object
-      properties:
-        OutputFormat:
-          type: string
-          enum: [None, Format85x11, Format4x6]
-        PrintPhone:
-          type: boolean
-          description: "Show the phone number on the label"
-        HideAccountNumber:
-          type: boolean
-          description: "Hide the account number on the label"
     DTOSender:
       type: object
       properties:
