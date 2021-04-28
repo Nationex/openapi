@@ -412,7 +412,7 @@ paths:
           in: path
           description: ID of the shipment or ID of a parcel for a single label
           required: true
-          example: 123456
+          example: 103848576
           schema:
             type: integer
             format: int64
