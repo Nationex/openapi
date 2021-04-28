@@ -265,6 +265,17 @@ paths:
       description: 'Update Address, SNR or notes of a shipment'
       security:
         - BasicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of the shipment (9 digits)
+          required: true
+          example: 999999999
+          schema:
+            type: integer
+            format: int32
+            minimum: 100000000
+            maximum: 999999999
       requestBody:
           description: Shipment to update
           required: true
