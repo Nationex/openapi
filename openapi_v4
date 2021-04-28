@@ -218,8 +218,8 @@ paths:
       security:
         - BasicAuth: []
       responses:
-        '204':
-          description: 'No content'
+        '200':
+          description: 'Success'
           content:
             application/json:
               schema:
@@ -229,8 +229,8 @@ paths:
                     type: boolean
               examples:
                     Boolean Response:
-                        value:
-                          true
+                      value:
+                        true
         '401':
           description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
           content:
