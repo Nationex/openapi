@@ -428,11 +428,11 @@ paths:
         - name: orientation
           in: query
           description: Orientation of the file
-          example: portrait
+          example: landscape
           required: false
           schema:
             type: string
-            enum: [portrait]
+            enum: [landscape, portrait]
             default: portrait
         - name: format
           in: query
