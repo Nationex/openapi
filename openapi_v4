@@ -433,7 +433,7 @@ paths:
           schema:
             type: string
             enum: [landscape, portrait]
-            default: portrait
+            default: landscape
         - name: format
           in: query
           description: Page format of the file
