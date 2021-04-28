@@ -986,37 +986,6 @@ components:
             schema:
               $ref: '#/components/schemas/Error'
   schemas:
-    LoginRequest:
-      type: object
-      required:
-        - username
-        - password
-      properties:
-        username:
-          type: string
-          description: User's username
-          example: user123
-        password:
-          type: string
-          description: User's password
-          example: password123
-    DTOUser:
-      type: object
-      required:
-        - Username
-      properties:
-        Username:
-          type: string
-          description: User's username
-          example: User123
-        Password:
-          type: string
-          description: User's password
-          example: Password123
-        Email:
-          type: string
-          description: User's email
-          example: test@test.com
     DTOParcelHistory:
       type: object
       description: 'Event of a single parcel'
