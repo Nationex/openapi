@@ -1780,9 +1780,9 @@ components:
         City:
           type: string
           example: "Montreal"
-        Province:
+        ProvinceFr:
           type: string
-          example: "QC"
+          example: "Québec"
         Zone:
           type: string
           example: "MTL"
