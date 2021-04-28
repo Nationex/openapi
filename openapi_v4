@@ -2043,10 +2043,12 @@ components:
           type: integer
           example: "100"
         DeliveryDays:
-          type: string
-          example: "12345"
-          description: "Days of week serviced by Nationex. 1 = Monday, 2 = Tuesday, etc."
-          #TODO : include weekends ?
+          description: "Days of week serviced by Nationex."
+          type: array
+          items:
+            type: string
+            enum: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+          example: [Monday, Tuesday, Wednesday, Thursday, Friday]
     DTOAddressChange:
       type: object
       description: "Contains the new address of the shipment"
