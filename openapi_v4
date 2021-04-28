@@ -410,12 +410,12 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of the shipment
+          description: ID of the shipment or ID of a parcel for a single label
           required: true
           example: 123456
           schema:
             type: integer
-            format: int32
+            format: int64
         - name: type
           in: query
           description: Type of file
