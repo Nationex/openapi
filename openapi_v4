@@ -735,7 +735,12 @@ paths:
       responses:
         '200':
           description: 'Ok'
-          #headers TODO : Include headers
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+                description: Used only with `application/pdf` responses
+                example: attachment; filename="manifest_2021-04-28.pdf"
           #TODO Response
           content:
             application/pdf:
