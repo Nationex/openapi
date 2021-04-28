@@ -1193,65 +1193,6 @@ components:
           type: string
           maxLength: 255
           example: example@gmail.com
-    DTOCustomerInfo:
-      type: object
-      properties:
-        CustomerId:
-          type: integer
-          format: int32
-          description: Nationex Customer Id (5 or 6 digits)
-          example: 113300
-        Name:
-          type: string
-          description: Customer Name
-          example: Nationex
-        ShortName:
-          type: string
-          description: Shorter customer name
-          example: Nationex
-        Address1:
-          type: string
-          description: First part of address, includes street number and street name
-          example: 433 Apple street
-        Address2:
-          type: string
-          description: Second part of address, optional
-          example: 3rd floor
-        City:
-          type: string
-          example: Montreal
-        Province:
-          type: string
-          example: QC
-        PostalCode:
-          type: string
-          example: H2H2S2
-        Phone:
-          type: string
-          example: 4183776671
-        Phone2:
-          type: string
-          example: 4183776671
-        Fax:
-          type: string
-          example: 4183776671
-        Language:
-          type: string
-          enum: [Undefined, Fr, En, Bi]
-          example: "Fr"
-        Active:
-          type: boolean
-          description: "False when the customer's account is closed"
-          example: true
-        MinWeight:
-          type: number
-          format: float
-          example: 5.0
-          description: "Minimum  (lbs)"
-        Note:
-          type: string
-          description: "Customer note"
-          example: "Déménagé/Moved"
     DTODimensions:
       type: object
       properties:
