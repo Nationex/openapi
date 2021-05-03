@@ -18,7 +18,7 @@ info:
     We release new versions when we make backwards-incompatible changes to our APIs.
     The current version of our APIs is v4, so the base URL will always look something like this :
 
-    **https://api.nationex.com/v4**
+    **https://api.nationex.com/api/v4**
 
     # Requirements
       You need to get API keys from our IT team at **tech@nationex.com**. You will start with API devlopement key and when your ready to go live you will change your API for the production one.
