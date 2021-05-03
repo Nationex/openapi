@@ -479,6 +479,97 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
+  /Shipments/:
+    get:
+      tags:
+        - Shipments
+      summary: 'Get shipment list'
+      description: 'Returns the list of shipment'
+      operationId: getListShipment
+      parameters:
+        - name: customer
+          in: query
+          description: Nationex Customer Id (5 or 6 digits)
+          required: true
+          example: 113300
+          schema: 
+            type: integer
+            format: int32
+        - name: search
+          in: query
+          description: Query string for search
+          required: false
+          schema:
+            type: string
+          example: 123 Main Street, New York, NY 10030
+        - name: startDate
+          in: query
+          description: Start date in date range, defaults to current date.
+          required: false
+          schema:
+            type: string
+            format: date
+          example: "2018-05-01"
+        - name: endDate
+          in: query
+          description: End date in date range, defaults to current date.
+          required: false
+          schema:
+            type: string
+            format: date
+          example: "2018-06-01"
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: "1"
+        - name: size
+          in: query
+          description: Number of results per page
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: "20"
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DTOShipment'
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
   /Customers/{id}/rates:
     post:
       tags:
@@ -1287,9 +1378,9 @@ components:
           example: 5.5
         ShipmentStatus:
           type: string
-          enum: [DataReceived, InTransit, OutForDelivery, AwaitingPickup, OnHold, Cancelled, Completed]
+          enum: [Creation, Pickup, Transit, OutForDelivery, Delivered, OnHold, Attention, Cancelled, ReturnCompleted, OutForPickup, RefusedDelivery, ReturnToSender, PartiallyPickedUp, PartiallyInTransit, PartiallyDelivered]
           description: "Global status of the entire shipment"
-          example: 'DataReceived'
+          example: 'Creation'
         ShipmentStatusFr:
           type: string
           description: "Readable ShipmentStatus in french"
