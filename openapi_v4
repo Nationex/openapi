@@ -1027,14 +1027,6 @@ components:
           type: string
           description: 'Description of parcel history in english'
           example: 'Unavailable consignee - Delivery attempt on next business day'
-        DescriptionShortFr:
-          type: string
-          description: 'Description of parcel history in french, more generic than DescriptionFr'
-          example: 'Impossible de faire la livraison'
-        DescriptionShortEn:
-          type: string
-          description: 'Description of parcel history in english, more generic than DescriptionEr'
-          example: 'Unable to deliver'
         PhotoId:
           type: integer
           format: int64
