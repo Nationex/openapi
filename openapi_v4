@@ -50,7 +50,7 @@ info:
     url: 'https://apidocs.nationex.com/images/Nationex_logo.png'
     altText: Nationex logo    
 servers:
-  - url: 'https://api.nationex.com/v4'
+  - url: 'https://api.nationex.com/api/v4'
     variables:
       environment:
         default: Development
