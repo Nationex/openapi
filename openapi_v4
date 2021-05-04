@@ -1630,6 +1630,11 @@ components:
           format: int32
           example: 2
           description: "Transit delay in business days"
+        EstimatedDeliveryDate:
+          type: string
+          format: date
+          example: '2021-05-05'
+          description: 'Estimated date of delivery'
     DTOTaxCharge:
       description: "Name, rate and amount of tax"
       type: object
