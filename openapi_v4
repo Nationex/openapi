@@ -518,7 +518,7 @@ paths:
                 $ref: '#/components/responses/NotFound'
               example: 
                 code: 404
-                message: "ConsigneeId 388283984 does not exist"
+                message: "Postal code A0A0A0 not found"
         '500':
           description: 'InternalServerError: 	There has been an unexpected error in our server'
           content:
