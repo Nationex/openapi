@@ -465,7 +465,7 @@ paths:
       tags:
         - Customers
       summary: 'Get transit delay'
-      description: 'Get estimated time of delivery for a specified Destination'
+      description: 'Get estimated date of delivery for a specified Destination'
       parameters:
         - in: path
           name: id
@@ -476,10 +476,27 @@ paths:
             type: integer
             format: int32
         - in: query
-          name: destination
-          description: Postal Code of the destination
-          required: true
-          example: J4T4R5
+          name: shipmentType
+          description: Type of shipment
+          required: false
+          schema:
+            type: string
+            enum: [Delivery, PickupReturn, PickupDelivery]
+            example: Delivery
+            default: Delivery
+        - in: query
+          name: destPostalCode
+          description: Postal Code of the destination, required for Delivery and PickupDelivery. Customer's postal code is used as default for PickupReturn.
+          required: false
+          example: J4T2S2
+          schema:
+            type: string
+            maxLength: 6
+        - in: query
+          name: origPostalCode
+          description: Postal Code of the origin, required for PickupReturn and PickupDelivery. Customer's postal code is used by default for Delivery
+          required: false
+          example: J4Z2S5
           schema:
             type: string
             maxLength: 6
