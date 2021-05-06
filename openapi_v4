@@ -500,6 +500,14 @@ paths:
           schema:
             type: string
             maxLength: 6
+        - in: query
+          name: pickupDate
+          description: Date of pickup. Defaults to Today for Delivery, and to next business day for PickupReturn and PickupDelivery.
+          required: false
+          example: "2021-05-07"
+          schema:
+            type: string
+            format: date
       security:
         - BasicAuth: []
       responses:
