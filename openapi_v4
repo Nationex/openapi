@@ -1539,7 +1539,7 @@ components:
         BusinessDays:
           type: integer
           format: int32
-          description: "Estimated number of business days for transit"
+          description: "Estimated number of business days for transit. Starting from pickupDate and not necessarily from current day."
           example: 1
         DeliveryDate:
           type: string
@@ -1549,7 +1549,7 @@ components:
         TotalDays:
           type: integer
           format: int32
-          description: "Estimated totals days for transit including weekends and holidays"
+          description: "Estimated totals days for transit including weekends and holidays. Starting from pickupDate and not necessarily from current day."
           example: 3
     DTORatesRequestParcel:
       type: object
