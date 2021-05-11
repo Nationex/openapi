@@ -21,7 +21,7 @@ info:
     **https://api.nationex.com/api/v4**
 
     # Requirements
-      You need to get API keys from our IT team at **tech@nationex.com**. You will start with API devlopement key and when your ready to go live you will change your API for the production one.
+      You need to get API keys from our IT team at **tech@nationex.com**. You will start with API devlopement key and when you are ready to go live you will change your API for the production one.
 
     # Authentication
     Nationex Restfull API needs authentication:
