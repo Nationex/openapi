@@ -346,7 +346,7 @@ paths:
           required: false
           schema:
             type: string
-            enum: [PDF]
+            enum: [PDF, ZPL]
             default: PDF
         - name: orientation
           in: query
