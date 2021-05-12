@@ -1294,6 +1294,7 @@ components:
           type: string
           description: Reference number, string which can be used to track the shipment
           example: CX4335
+          maxLength: 15
         Note:
           type: string
           description: A Delivery Note
