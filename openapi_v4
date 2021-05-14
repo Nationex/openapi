@@ -401,7 +401,72 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
-     
+  /Shipments/{id}/labelsZpl:
+    get:
+      tags:
+        - Shipments
+      summary: 'Get labels ZPL'
+      description: 'Returns ZPL label strings attached to a particular shipment'
+      operationId: getLabelsZpl
+      parameters:
+        - name: id
+          in: path
+          description: ID of the shipment or ID of a parcel for a single label
+          required: true
+          example: 103848576
+          schema:
+            type: integer
+            format: int64
+        - name: orientation
+          in: query
+          description: Orientation of the file
+          example: landscape
+          required: false
+          schema:
+            type: string
+            enum: [landscape, portrait]
+            default: landscape
+      responses:
+        '200':
+          description: 'ZPL String'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ZPLString:
+                    type: string
+              examples:
+                    String Response:
+                      value:
+                        '^XA^LRY\r\n^CF0,,30^FWR,0^FO750,100^FDLIBRAIRIE LU-LU ( ALQ )^FS\r\n^FO750,770^FDDATE: 2021-05-02^FS\r\n^FO750,1030^FD11:15:07^FS\r\n^FO720,100^FD144890^FS\r\n^FO720,770^FDREF: LIQ631858^FS\r\n^FO710,100^GB1,1040,3^FS\r\n^FO665,100^FDPOIDS(lbs): 1.00^FS\r\n^FO665,350^FD(KG): 0.45^FS\r\n^FO660,100^GB1,1040,3^FS\r\n^FO610,100^FDAURELIE CONSTANCIAS^FS\r\n^FO580,100^FD1259 RUE DU PEKAN^FS\r\n^FO550,100^FD^FS\r\n^FO520,100^FDSAINTE-JULIENNE, QC^FS\r\n^FO490,100^FDJ0K2T0^FS\r\n^CF0,,80^FWR,0^FO540,890^FDJ0K^FS\r\n^FO165,1040^GB95,50,90,b^FS\r\n^FO160,1050^FD^FS\r\n^FO545,720^GB95,160,90,b^FS\r\n^FO540,730^FDBLV^FS\r\n^FO390,1110^FD1^FS\r\n^FO370,660^BY4,2,230^BCr,150,Y,N,N^FDJ0K2T0^FS\r\n^FO80,100^BY5,2,230^B2r,,n,,n^FD999989028016^FS\r\n^CF0,, 45^FWR,0^FO20,210^FD999989028^FS\r\n^CF0,,40^FWR,0^FO70,630^FD1^FS\r\n^FO70,650^FD/1^FS\r\n^FO160,700^GB150,285,75,b^FS\r\n^FO250,720^FDFloor: ^FS\r\n^FO210,720^FDRoute: 25^FS\r\n^FO170,720^FDDriver: 250^FS\r\n^XZ'
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
   /Customers/{id}/rates:
     post:
       tags:
