@@ -987,6 +987,12 @@ components:
           description: "Amount of cash on delivery"
     DTODestination:
       type: object
+      required:
+          - AccountName
+          - Address1
+          - PostalCode
+          - City
+          - Phone
       properties:
         Contact:
           type: string
