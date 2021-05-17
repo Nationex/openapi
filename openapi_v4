@@ -1147,6 +1147,12 @@ components:
             $ref: '#/components/schemas/DTOParcelHistory'
     DTOSender:
       type: object
+      required:
+          - AccountName
+          - Address1
+          - PostalCode
+          - City
+          - Phone
       properties:
         Contact:
           type: string
@@ -1203,7 +1209,7 @@ components:
           default: false
         NoCivic:
           type: string
-          description: Civic address number or street number
+          description: Civic address number or street number (Use either Address 1 or a combination of NoCivic/StreetName)
           example: 880
           maxLength: 20
         Suite:
@@ -1212,7 +1218,7 @@ components:
           maxLength: 30
         StreetName:
           type: string
-          description: Name of the street
+          description: Name of the street 
           example: Rue Claudia
           maxLength: 50
         Email:
