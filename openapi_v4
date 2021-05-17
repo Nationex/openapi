@@ -1051,7 +1051,7 @@ components:
           default: false
         NoCivic:
           type: string
-          description: Civic address number or street number
+          description: Civic address number or street number (Use either Address 1 or a combination of NoCivic/StreetName)
           example: 880
           maxLength: 20
         Suite:
