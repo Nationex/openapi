@@ -204,7 +204,7 @@ paths:
       tags:
         - Shipments
       summary: 'Cancel shipment'
-      description: 'Cancel a shipment, can only be used before 8 PM EST'
+      description: 'Cancel a shipment, can only be used before 8 PM EST the same day'
       operationId: delete
       parameters:
         - name: id
