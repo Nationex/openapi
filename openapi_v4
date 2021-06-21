@@ -553,10 +553,10 @@ paths:
           in: query
           description: 'Date of the pickup, defaults to next business day'
           required: false
-          example: 103848576
+          example: 2021-06-25
           schema:
-            type: integer
-            format: int64
+            type: string
+            format: date
       responses:
         '200':
           description: 'Success'
