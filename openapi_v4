@@ -472,7 +472,7 @@ paths:
       tags:
         - Shipments
       summary: 'Hold pickup'
-      description: 'Holds the pickup for a PickupDelivery or PickupReturn. The pickup will not be done until reactivated'
+      description: 'Holds the pickup for a PickupDelivery or PickupReturn. The pickup will not be done until reactivated. By default when creating a shipment, the pickup is already active.'
       operationId: holdPickup
       parameters:
         - name: id
@@ -538,7 +538,7 @@ paths:
       tags:
         - Shipments
       summary: 'Reactivate pickup'
-      description: 'Reactivates the pickup for a PickupDelivery or PickupReturn'
+      description: 'Reactivates the pickup for a PickupDelivery or PickupReturn. By default when creating a shipment, the pickup is already active.'
       operationId: reactivatePickup
       parameters:
         - name: id
