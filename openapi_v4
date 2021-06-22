@@ -1896,6 +1896,32 @@ components:
             type: string
             enum: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
           example: [Monday, Tuesday, Wednesday, Thursday, Friday]
+    DTOInvoiceInfo:
+      type: object
+      description: "Contains dates and download links to download invoices documents"
+      properties:
+        ShippingAccount:
+          description: "Nationex CustomerId (5 or 6 digits), can be different from billing account"
+          type: integer
+          format: int32
+          example: 113300
+        InvoiceDate:
+          description: "Date of the invoice"
+          type: string
+          format: date
+          example: "2021-05-04"
+        InvoiceLinkToken:
+          description: "Link to download invoice"
+          type: string
+        ManifestPDFLinkToken:
+          description: "Link to download PDF"
+          type: string
+        ManifestExcelLinkToken:
+          description: "Link to download Excel"
+          type: string
+        MiscLinkToken:
+          description: "Link to download Misc"
+          type: string
     DTOPhoto:
       type: object
       description: "Contains the Id of the picture or signature and Base64 string data"
