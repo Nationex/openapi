@@ -1657,6 +1657,12 @@ components:
             example: 2
             minimum: 1
             maximum: 99
+        UnitsOfMeasurement:
+          type: string
+          enum: [LI, KC]
+          description: LI = lb|inch, KC = kg|cm
+          example: LI
+          default: LI
         Accessories:
             $ref: '#/components/schemas/DTOAccessory'
         Parcels:
