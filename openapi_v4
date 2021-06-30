@@ -467,6 +467,73 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
+  /Shipments/{id}/dangerous:
+    post:
+      tags:
+        - Shipments
+      summary: 'Get dangerous goods PDF'
+      description: 'Returns a dangerous goods PDF'
+      operationId: getDangerousPDF
+      parameters:
+        - name: id
+          in: path
+          description: ID of the shipment or ID of a parcel for a single label
+          required: true
+          example: 103848576
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+          description: Dangerous Goods PDF report info
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTODangerousGoods'
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: 'InvalidInput: Class1 is required'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "Class1 is required"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
   /Shipments/{id}/HoldPickup:
     post:
       tags:
@@ -1976,5 +2043,95 @@ SUVORK5CYII="
         message:
           type: string
           example: Address1 is too long.
+    DTODangerousGoods:
+      description: "Information to be displayed on Dangerous Goods PDF report. Only Class1 is required"
+      type: object
+      required:
+      - Class1
+      properties:
+        Language:
+          type: string
+          enum: [Fr, En]
+          example: Fr
+          default: Fr
+        WarehouseClerkName:
+          type: string
+          example: "Bob"
+        DriverNumber:
+          type: string
+          example: "123ABC"
+        TransportUnitNo:
+          type: string
+          example: "3449DZO"
+        Class1:
+          description: "Class for row 1 on dangerous goods PDF report. The class number will be associated with the value :
+                          - Safety explosives (1.4S)
+                          - Flammable gas (2.1)
+                          - Non-flammable compressed gas (2.2)
+                          - Flammable liquids (3)
+                          - Flammable solids (4.1)
+                          - Spontaneously combustible (4.2)
+                          - Oxidizer (5.1)
+                          - Toxic substances packing (6.1)
+                          - Infectious substances (6.2)
+                          - Corrosive matters (8)
+                          - Miscellaneous products or substances (?)"
+          type: string
+          enum: [SafetyExplosives,FlammableGas,NonflammableCompressedGas,FlammableLiquids,FlammableSolids,SpontaneouslyCombustible,Oxidizer,ToxicSubstancesPacking,CorrosiveMatters,MiscellaneousProducts]
+          example: CorrosiveMatters
+        Class2:
+          description: "Class for row 2 on dangerous goods PDF report"
+          type: string
+          enum: [SafetyExplosives,FlammableGas,NonflammableCompressedGas,FlammableLiquids,FlammableSolids,SpontaneouslyCombustible,Oxidizer,ToxicSubstancesPacking,CorrosiveMatters,MiscellaneousProducts]
+          example: CorrosiveMatters
+        Class3:
+          description: "Class for row 3 on dangerous goods PDF report"
+          type: string
+          enum: [SafetyExplosives,FlammableGas,NonflammableCompressedGas,FlammableLiquids,FlammableSolids,SpontaneouslyCombustible,Oxidizer,ToxicSubstancesPacking,CorrosiveMatters,MiscellaneousProducts]
+        UNNumber1:
+          description: "UN numbers or UN IDs are four-digit numbers that identify dangerous goods, hazardous substances and articles (such as explosives, flammable liquids, toxic substances, etc.) in the framework of international transport. They are assigned by the United Nations Committee of Experts on the Transport of Dangerous Goods"
+          type: string
+          example: "UN 0006"
+          default: ""
+        UNNumber2:
+          type: string
+          example: "UN 0013"
+          default: ""
+        UNNumber3:
+          type: string
+          default: ""
+        PackingGroup1:
+          type: integer
+          example: 1
+          default: 0
+        PackingGroup2:
+          type: integer
+          example: 2
+          default: 0
+        PackingGroup3:
+          type: integer
+          default: 0
+        TotalQty1:
+          type: integer
+          example: 1
+          default: 0
+        TotalQty2:
+          type: integer
+          example: 2
+          default: 0
+        TotalQty3:
+          type: integer
+          default: 0
+        NbrPackagesRequiringLabels1:
+          type: integer
+          example: 1
+          default: 0
+        NbrPackagesRequiringLabels2:
+          type: integer
+          example: 2
+          default: 0
+        NbrPackagesRequiringLabels3:
+          type: integer
+          default: 0
 security:
     - BasicAuth: []
