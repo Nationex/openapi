@@ -1417,6 +1417,10 @@ components:
           type: string
           description: 'Readable EstimatedTime in english'
           example: 'Between 12:45 and 13:45'
+        EstimatedPercentageBeforeDelivery:
+          type: integer
+          description: 'Estimated percentage of delivery, 100 when delivered'
+          example: 88
         Dimensions:
           $ref: '#/components/schemas/DTODimensions'
         History:
