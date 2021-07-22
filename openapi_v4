@@ -1927,7 +1927,7 @@ components:
           type: number
           format: float
           example: 15.5
-          description: "Weight of the parcel (only lbs supported)"
+          description: "Weight of the parcel (only lbs supported). Maximum 99 lbs"
         Dimensions:
           $ref: '#/components/schemas/DTODimensions'
     DTOLocation:
