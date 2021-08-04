@@ -1929,6 +1929,7 @@ components:
           example: 15.5
           description: "Weight of the parcel in lbs by default, can be changed in UnitsOfMeasurement for GetRates. Maximum 99 lbs"
         Dimensions:
+          description: "Maximum volume is 16 cubic feet, maximum single dimension is 10 feet"
           $ref: '#/components/schemas/DTODimensions'
     DTOLocation:
       type: object
