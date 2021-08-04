@@ -1582,7 +1582,6 @@ components:
         Destination:
           $ref: '#/components/schemas/DTODestination' 
         Accessory:
-          description: "Watch out, this one is named 'Accessories' in DTOShipmentRatesRequest and DTOShipmentCreate"
           $ref: '#/components/schemas/DTOAccessory'
         Parcels:
           type: array
@@ -1735,7 +1734,7 @@ components:
           description: LI = lb|inch, KC = kg|cm
           example: LI
           default: LI
-        Accessories:
+        Accessory:
             $ref: '#/components/schemas/DTOAccessory'
         Parcels:
           description: "Optional, can be used to provide weight and dimensions of individual parcels for a more accurate price"
