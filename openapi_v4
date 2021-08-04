@@ -1927,7 +1927,7 @@ components:
           type: number
           format: float
           example: 15.5
-          description: "Weight of the parcel. Maximum 99 lbs"
+          description: "Weight of the parcel in lbs by default, can be changed in UnitsOfMeasurement for GetRates. Maximum 99 lbs"
         Dimensions:
           $ref: '#/components/schemas/DTODimensions'
     DTOLocation:
