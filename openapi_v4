@@ -1582,7 +1582,7 @@ components:
         Destination:
           $ref: '#/components/schemas/DTODestination' 
         Accessory:
-          description: "Watch out, this one is named 'Accessories' in DTOShipmentRatesRequest and DTOShipmentCreate
+          description: "Watch out, this one is named 'Accessories' in DTOShipmentRatesRequest and DTOShipmentCreate"
           $ref: '#/components/schemas/DTOAccessory'
         Parcels:
           type: array
