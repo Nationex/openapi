@@ -756,6 +756,7 @@ paths:
             enum: [Delivery, PickupReturn, PickupDelivery]
             example: Delivery
             default: Delivery
+            description: Delivery - Schedule a pickup at the address registered in your Nationex account and deliver it to your consignee. PickupReturn - Parcels picked up at a location and brought back to your location. PickupDelivery - Parcels picked up at one location and shipped to another location which is different than your own location. Billed to your Nationex account.
         - in: query
           name: destPostalCode
           description: Postal Code of the destination, required for Delivery and PickupDelivery. Customer's postal code is used as default for PickupReturn.
@@ -1563,6 +1564,7 @@ components:
           enum: [Delivery, PickupReturn, PickupDelivery]
           example: Delivery
           default: Delivery
+          description: Delivery - Schedule a pickup at the address registered in your Nationex account and deliver it to your consignee. PickupReturn - Parcels picked up at a location and brought back to your location. PickupDelivery - Parcels picked up at one location and shipped to another location which is different than your own location. Billed to your Nationex account.
         ReferenceNumber:
           type: string
           description: Reference number, string which can be used to track the shipment
@@ -1628,7 +1630,7 @@ components:
           enum: [Delivery, PickupReturn, PickupDelivery]
           example: Delivery
           default: Delivery
-          description: A delivery is a shipment with the Nationex Customer as origin and Consignee as destination
+          description: Delivery - Schedule a pickup at the address registered in your Nationex account and deliver it to your consignee. PickupReturn - Parcels picked up at a location and brought back to your location. PickupDelivery - Parcels picked up at one location and shipped to another location which is different than your own location. Billed to your Nationex account.
         TotalParcels:
           type: integer
           format: int32
@@ -1708,6 +1710,7 @@ components:
           enum: [Delivery, PickupReturn, PickupDelivery]
           example: Delivery
           default: Delivery
+          description: Delivery - Schedule a pickup at the address registered in your Nationex account and deliver it to your consignee. PickupReturn - Parcels picked up at a location and brought back to your location. PickupDelivery - Parcels picked up at one location and shipped to another location which is different than your own location. Billed to your Nationex account.
         SourcePostalCode:
             type: string
             description: Postal code of the origin
