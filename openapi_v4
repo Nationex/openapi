@@ -1668,6 +1668,11 @@ components:
           $ref: '#/components/schemas/DTODestination'
         Accessory:
           $ref: '#/components/schemas/DTOAccessory'
+        Parcels:
+          description: "Optional, can be used to provide weight and dimensions of individual parcels for a more accurate price"
+          type: array
+          items:
+            $ref: '#/components/schemas/DTORatesRequestParcel'
     DTOShipmentCreated:
       type: object
       properties:
