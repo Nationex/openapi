@@ -1375,6 +1375,10 @@ components:
           type: integer
           format: int32
           description: "Number of the parcel in the shipment, starting at 1"
+        ReferenceNumber:
+          type: string
+          description: "Reference number, string which can be used to track the shipment"
+          example: "JDI394"
         NCV:
           type: boolean
           description: "Non conveyable. These are the criterias for non-conveyable items :
