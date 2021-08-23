@@ -553,10 +553,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  Success:
-                    type: boolean
+                type: boolean
               examples:
                     Boolean Response:
                       value:
