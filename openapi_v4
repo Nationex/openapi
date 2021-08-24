@@ -1687,6 +1687,12 @@ components:
           items:
             type: string
           example: [50188393801, 50188393802]
+        Barcodes:
+          description: If no custom barcode is provided, the ParcelId's with the check digits are returned.
+          type: array
+          items:
+            type: string
+          example: [501883938010, 501883938027]
         RatesDetail:
           $ref: '#/components/schemas/DTORatesDetail'
     DTOShipmentRatesRequest:
