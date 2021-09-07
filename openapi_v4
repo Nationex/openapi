@@ -2147,5 +2147,25 @@ SUVORK5CYII="
         NbrPackagesRequiringLabels3:
           type: integer
           default: 0
+    DTOShipmentStatusHistory:
+      description: "History of shipment status"
+      type: object
+      properties:
+        ShipmentStatus:
+          type: string
+          enum: [Creation, Pickup, Transit, OutForDelivery, Delivered, OnHold, Attention, Cancelled, ReturnCompleted, OutForPickup, RefusedDelivery, ReturnToSender, PartiallyPickedUp, PartiallyInTransit, PartiallyOutForDelivery, PartiallyDelivered]
+          description: "Global status of the entire shipment"
+          example: 'DataReceived'
+        ShipmentStatusFr:
+          type: string
+          description: "Readable ShipmentStatus in french"
+          example: "Données reçues"
+        ShipmentStatusEn:
+          type: string
+          description: "Readable ShipmentStatus in english"
+          example: "Data received"
+        StatusDate:
+          type: string
+          format: date-time
 security:
     - BasicAuth: []
