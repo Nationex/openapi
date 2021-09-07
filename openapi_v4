@@ -1554,6 +1554,10 @@ components:
           type: string
           description: "Readable ShipmentStatus in english"
           example: "Data received"
+        StatusHistories:
+          type: array
+          items:
+            $ref: '#/components/schemas/DTOShipmentStatusHistory'
         ShipmentType:
           type: string
           enum: [Delivery, PickupReturn, PickupDelivery]
