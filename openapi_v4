@@ -1707,6 +1707,7 @@ components:
       required:
       - CustomerId
       - DestinationPostalCode
+      - TotalParcels
       properties:
         CustomerId:
             type: integer
