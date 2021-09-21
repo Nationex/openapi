@@ -2175,5 +2175,8 @@ SUVORK5CYII="
         StatusDate:
           type: string
           format: date-time
+        LastLocation:
+          type: string
+          example: St-Hubert
 security:
     - BasicAuth: []
