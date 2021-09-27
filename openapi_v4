@@ -2066,10 +2066,8 @@ SUVORK5CYII="
           type: string
           example: Address1 is too long.
     DTODangerousGoods:
-      description: "Information to be displayed on Dangerous Goods PDF report. Only Class1 is required"
+      description: "Information to be displayed on Dangerous Goods PDF report. If no class is provided those fields will be left empty, to be filled manually"
       type: object
-      required:
-      - Class1
       properties:
         Language:
           type: string
