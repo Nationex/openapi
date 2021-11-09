@@ -1593,6 +1593,14 @@ components:
           format: int32
           description: 'Id of the consolidated shipment. Corresponds to the lowest ShipmentId of the shipments going to the same address, same day'
           example: 103882771
+        IsInvoiced:
+          description: 'Indicates if the shipment has been invoiced. Only appears if parameter ''tracking'' is true in Get Shipment'
+          type: boolean
+          example: false
+        IsScanned:
+          description: 'Indicates if the shipment has been scanned. Only appears if parameter ''tracking'' is true in Get Shipment'
+          type: boolean
+          example: false
         Photos:
           type: array
           items:
