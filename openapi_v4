@@ -1601,6 +1601,10 @@ components:
           description: 'Indicates if the shipment has been scanned. Only appears if parameter ''tracking'' is true in Get Shipment'
           type: boolean
           example: false
+        IsConsolidated:
+          type: boolean
+          description: 'Indicates if the shipment has other shipments consolidated with it'
+          example: false
         Photos:
           type: array
           items:
