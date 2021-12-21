@@ -1135,6 +1135,71 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
+  /Partners/insertEvent:
+    post:
+      tags:
+        - Partners
+      summary: 'Insert Event'
+      description: 'Insert an even for parcels, can include signatures, pictures. Nationex partner api key required.'
+      security:
+        - BasicAuth: []
+      requestBody:
+          description: Event to insert
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOEvent'
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Success:
+                    type: boolean
+              examples:
+                    Boolean Response:
+                      value:
+                        true
+        '400':
+          description: 'InvalidInput: ParcelIds is required'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InvalidInput'
+              example: 
+                code: 400
+                message: "ParcelIds is required"
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ParcelId 50139943201"
+        '500':
+          description: 'InternalServerError:   There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
 components:
   securitySchemes:
     BasicAuth:     # <-- arbitrary name for the security scheme
@@ -2188,5 +2253,92 @@ SUVORK5CYII="
         LastLocation:
           type: string
           example: St-Hubert
+    DTOEvent:
+      type: object
+      description: 'Event of a single parcel'
+      properties:
+        ParcelIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+            description: 'Nationex Id of the parcel. 11 digits (9 digit shipmentId followed by 2 digit parcel number)'
+            example: 10344859601
+        ProcessedDate:
+          type: string
+          format: date-time
+          description: 'Date time of the event'
+          example: "2021-03-31 13:31:00"
+        EventId:
+          type: integer
+          format: int32
+          description: "ID of the event/exception : 
+          [3] - Wrong Address
+          [4] - Consignee refused
+          [5] - Unavailable consignee
+          [7] - No parcel to pickup
+          [52] - Pickup of the parcel completed
+          [119] - Delivery completed"
+          example: 5
+        Photos:
+          type: array
+          items:
+            type: string
+            format: byte
+            example: "iVBORw0KGgoAAAANSUhEUgAAAZsAAACBCAYAAAAWohexAAAEtUlEQVR4Xu3VwQkAMAwDsXj/pTPF
+/dQBGhCG23kECBAgQCAWWPy/7wkQIECAwImNERAgQIBALiA2ObEDBAgQICA2NkCAAAECuYDY5MQO
+ECBAgIDY2AABAgQI5AJikxM7QIAAAQJiYwMECBAgkAuITU7sAAECBAiIjQ0QIECAQC4gNjmxAwQI
+ECAgNjZAgAABArmA2OTEDhAgQICA2NgAAQIECOQCYpMTO0CAAAECYmMDBAgQIJALiE1O7AABAgQI
+iI0NECBAgEAuIDY5sQMECBAgIDY2QIAAAQK5gNjkxA4QIECAgNjYAAECBAjkAmKTEztAgAABAmJj
+AwQIECCQC4hNTuwAAQIECIiNDRAgQIBALiA2ObEDBAgQICA2NkCAAAECuYDY5MQOECBAgIDY2AAB
+AgQI5AJikxM7QIAAAQJiYwMECBAgkAuITU7sAAECBAiIjQ0QIECAQC4gNjmxAwQIECAgNjZAgAAB
+ArmA2OTEDhAgQICA2NgAAQIECOQCYpMTO0CAAAECYmMDBAgQIJALiE1O7AABAgQIiI0NECBAgEAu
+IDY5sQMECBAgIDY2QIAAAQK5gNjkxA4QIECAgNjYAAECBAjkAmKTEztAgAABAmJjAwQIECCQC4hN
+TuwAAQIECIiNDRAgQIBALiA2ObEDBAgQICA2NkCAAAECuYDY5MQOECBAgIDY2AABAgQI5AJikxM7
+QIAAAQJiYwMECBAgkAuITU7sAAECBAiIjQ0QIECAQC4gNjmxAwQIECAgNjZAgAABArmA2OTEDhAg
+QICA2NgAAQIECOQCYpMTO0CAAAECYmMDBAgQIJALiE1O7AABAgQIiI0NECBAgEAuIDY5sQMECBAg
+IDY2QIAAAQK5gNjkxA4QIECAgNjYAAECBAjkAmKTEztAgAABAmJjAwQIECCQC4hNTuwAAQIECIiN
+DRAgQIBALiA2ObEDBAgQICA2NkCAAAECuYDY5MQOECBAgIDY2AABAgQI5AJikxM7QIAAAQJiYwME
+CBAgkAuITU7sAAECBAiIjQ0QIECAQC4gNjmxAwQIECAgNjZAgAABArmA2OTEDhAgQICA2NgAAQIE
+COQCYpMTO0CAAAECYmMDBAgQIJALiE1O7AABAgQIiI0NECBAgEAuIDY5sQMECBAgIDY2QIAAAQK5
+gNjkxA4QIECAgNjYAAECBAjkAmKTEztAgAABAmJjAwQIECCQC4hNTuwAAQIECIiNDRAgQIBALiA2
+ObEDBAgQICA2NkCAAAECuYDY5MQOECBAgIDY2AABAgQI5AJikxM7QIAAAQJiYwMECBAgkAuITU7s
+AAECBAiIjQ0QIECAQC4gNjmxAwQIECAgNjZAgAABArmA2OTEDhAgQICA2NgAAQIECOQCYpMTO0CA
+AAECYmMDBAgQIJALiE1O7AABAgQIiI0NECBAgEAuIDY5sQMECBAgIDY2QIAAAQK5gNjkxA4QIECA
+gNjYAAECBAjkAmKTEztAgAABAmJjAwQIECCQC4hNTuwAAQIECIiNDRAgQIBALiA2ObEDBAgQICA2
+NkCAAAECuYDY5MQOECBAgIDY2AABAgQI5AJikxM7QIAAAQJiYwMECBAgkAs8wZUAgqa0VWgAAAAA
+SUVORK5CYII="
+        Signature:
+          type: string
+          format: byte
+          example: "iVBORw0KGgoAAAANSUhEUgAAAZsAAACBCAYAAAAWohexAAAEtUlEQVR4Xu3VwQkAMAwDsXj/pTPF
+/dQBGhCG23kECBAgQCAWWPy/7wkQIECAwImNERAgQIBALiA2ObEDBAgQICA2NkCAAAECuYDY5MQO
+ECBAgIDY2AABAgQI5AJikxM7QIAAAQJiYwMECBAgkAuITU7sAAECBAiIjQ0QIECAQC4gNjmxAwQI
+ECAgNjZAgAABArmA2OTEDhAgQICA2NgAAQIECOQCYpMTO0CAAAECYmMDBAgQIJALiE1O7AABAgQI
+iI0NECBAgEAuIDY5sQMECBAgIDY2QIAAAQK5gNjkxA4QIECAgNjYAAECBAjkAmKTEztAgAABAmJj
+AwQIECCQC4hNTuwAAQIECIiNDRAgQIBALiA2ObEDBAgQICA2NkCAAAECuYDY5MQOECBAgIDY2AAB
+AgQI5AJikxM7QIAAAQJiYwMECBAgkAuITU7sAAECBAiIjQ0QIECAQC4gNjmxAwQIECAgNjZAgAAB
+ArmA2OTEDhAgQICA2NgAAQIECOQCYpMTO0CAAAECYmMDBAgQIJALiE1O7AABAgQIiI0NECBAgEAu
+IDY5sQMECBAgIDY2QIAAAQK5gNjkxA4QIECAgNjYAAECBAjkAmKTEztAgAABAmJjAwQIECCQC4hN
+TuwAAQIECIiNDRAgQIBALiA2ObEDBAgQICA2NkCAAAECuYDY5MQOECBAgIDY2AABAgQI5AJikxM7
+QIAAAQJiYwMECBAgkAuITU7sAAECBAiIjQ0QIECAQC4gNjmxAwQIECAgNjZAgAABArmA2OTEDhAg
+QICA2NgAAQIECOQCYpMTO0CAAAECYmMDBAgQIJALiE1O7AABAgQIiI0NECBAgEAuIDY5sQMECBAg
+IDY2QIAAAQK5gNjkxA4QIECAgNjYAAECBAjkAmKTEztAgAABAmJjAwQIECCQC4hNTuwAAQIECIiN
+DRAgQIBALiA2ObEDBAgQICA2NkCAAAECuYDY5MQOECBAgIDY2AABAgQI5AJikxM7QIAAAQJiYwME
+CBAgkAuITU7sAAECBAiIjQ0QIECAQC4gNjmxAwQIECAgNjZAgAABArmA2OTEDhAgQICA2NgAAQIE
+COQCYpMTO0CAAAECYmMDBAgQIJALiE1O7AABAgQIiI0NECBAgEAuIDY5sQMECBAgIDY2QIAAAQK5
+gNjkxA4QIECAgNjYAAECBAjkAmKTEztAgAABAmJjAwQIECCQC4hNTuwAAQIECIiNDRAgQIBALiA2
+ObEDBAgQICA2NkCAAAECuYDY5MQOECBAgIDY2AABAgQI5AJikxM7QIAAAQJiYwMECBAgkAuITU7s
+AAECBAiIjQ0QIECAQC4gNjmxAwQIECAgNjZAgAABArmA2OTEDhAgQICA2NgAAQIECOQCYpMTO0CA
+AAECYmMDBAgQIJALiE1O7AABAgQIiI0NECBAgEAuIDY5sQMECBAgIDY2QIAAAQK5gNjkxA4QIECA
+gNjYAAECBAjkAmKTEztAgAABAmJjAwQIECCQC4hNTuwAAQIECIiNDRAgQIBALiA2ObEDBAgQICA2
+NkCAAAECuYDY5MQOECBAgIDY2AABAgQI5AJikxM7QIAAAQJiYwMECBAgkAs8wZUAgqa0VWgAAAAA
+SUVORK5CYII="
+        Contact:
+          type: string
+          example: 'Roger'
+        Reason:
+          type: string
+          example: 'No answer'
 security:
     - BasicAuth: []
