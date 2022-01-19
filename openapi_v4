@@ -1850,6 +1850,11 @@ components:
           items:
             $ref: '#/components/schemas/DTOSurchargeCharge'
           example:
+            - Id: '99'
+              Charge: 2.404
+              BeyondId: 0
+              NameFr: "Colis hors-norme - Longueur"
+              NameEn: "Oversized parcel - Lenght"
             - Id: '519'
               Charge: 8.404
               BeyondId: 102
