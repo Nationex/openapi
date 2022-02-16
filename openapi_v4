@@ -1748,6 +1748,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DTORatesRequestParcel'
+        UnitsOfMeasurement:
+          description: "Optional, used to provide rate if measurements are included, LI = lb|inch, KC = kg|cm"
+          type: string
+          enum: [LI, KC]
+          example: LI
+          default: LI
     DTOShipmentCreated:
       type: object
       properties:
