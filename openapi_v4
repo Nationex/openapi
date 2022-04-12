@@ -665,6 +665,72 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
+  /Shipments/{id}/pod:
+    get:
+      tags:
+        - Shipments
+      summary: 'Get shipment POD'
+      description: 'Returns proof of delivery for a shipment'
+      operationId: getShipmentPOD
+      parameters:
+        - name: id
+          in: path
+          description: ID of the shipment (9 digits)
+          required: true
+          example: 999999999
+          schema:
+            type: integer
+            format: int32
+            minimum: 100000000
+            maximum: 999999999
+        - name: consol
+          in: query
+          description: Returns all consolidated shipments or not
+          example: true
+          required: false
+          schema:
+            type: boolean
+        - name: images
+          in: query
+          description: Returns all photos and signatures of the shipment
+          example: true
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 'Details about a shipment by ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTOShipmentPOD'
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError: 	There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
   /Customers/{id}/rates:
     post:
       tags:
@@ -2414,5 +2480,30 @@ SUVORK5CYII="
         Reason:
           type: string
           example: 'No answer'
+    DTOShipmentPOD:
+      type: object
+      description: 'POD for a shipment'
+      properties:
+        Parcels:
+          type: array
+          items:
+            $ref: '#/components/schemas/DTOParcelPOD'
+        Photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/DTOPhoto'
+          description: "Signatures and photos."
+    DTOParcelPOD:
+      type: object
+      description: 'POD for a parcel'
+      properties:
+        ParcelId:
+          type: integer
+        DeliveredDate:
+          type: string
+          format: date-time
+        Contact:
+          type: string
+
 security:
     - BasicAuth: []
