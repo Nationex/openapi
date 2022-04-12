@@ -2499,6 +2499,7 @@ SUVORK5CYII="
       properties:
         ParcelId:
           type: integer
+          format: int64
         DeliveredDate:
           type: string
           format: date-time
