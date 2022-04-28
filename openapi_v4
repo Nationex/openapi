@@ -2177,18 +2177,10 @@ components:
           type: boolean
           example: true
           description: "Is served by Nationex"
-        CODAvailable:
-          type: boolean
-          example: true
-          description: "COD service is available"
         PickupAvailable:
           type: boolean
           example: true
           description: "Pickup service is available"
-        Before10h30Available:
-          type: boolean
-          example: true
-          description: "Before 10h30 AM delivery service is available"
         City:
           type: string
           example: "Montreal"
