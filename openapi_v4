@@ -1366,14 +1366,9 @@ components:
         DangerousGoods:
           type: boolean
           description: "Dangerous goods"
-        Before10h30am:
-          type: boolean
-          description: "Deliver before 10:30 AM service"
         SNR:
           type: boolean
           description: "No signature required"
-        COD:
-          $ref: '#/components/schemas/DTOCashOnDelivery'
     DTOCashOnDelivery:
       type: object
       properties:
