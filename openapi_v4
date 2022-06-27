@@ -1168,6 +1168,14 @@ paths:
           schema:
             type: string
             format: date
+        - in: query
+          name: pickupCount
+          description: Numbers of parcels to pick up. If null it will be all parcels that have not been picked up.
+          required: false
+          example: 12
+          schema:
+            type: integer
+            format: int32
       security:
         - BasicAuth: []
       responses:
