@@ -2306,6 +2306,11 @@ components:
           format: int32
           description: "Estimated totals days for transit including weekends and holidays. Starting from pickupDate and not necessarily from current day."
           example: 3
+        BeyondId:
+          type: integer
+          format: int32
+          description: "Beyond Id for billing"
+          example: 100
     DTORatesRequestParcel:
       type: object
       properties:
