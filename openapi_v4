@@ -1932,10 +1932,10 @@ components:
           example: "2021-03-30"
         ShipmentType:
           type: string
-          enum: [Delivery, PickupReturn, PickupDelivery]
+          enum: [Delivery, PickupReturn, PickupDelivery, DeliveryCollect]
           example: Delivery
           default: Delivery
-          description: Delivery - Schedule a pickup at the address registered in your Nationex account and deliver it to your consignee. PickupReturn - Parcels picked up at a location and brought back to your location. PickupDelivery - Parcels picked up at one location and shipped to another location which is different than your own location. Billed to your Nationex account.
+          description: Delivery - Schedule a pickup at the address registered in your Nationex account and deliver it to your consignee. PickupReturn - Parcels picked up at a location and brought back to your location. PickupDelivery - Parcels picked up at one location and shipped to another location which is different than your own location. Billed to your Nationex account. DeliveryCollect - Can only be used by collect accounts, regular shipments to be billed to the consignee's account.
         TotalParcels:
           type: integer
           format: int32
