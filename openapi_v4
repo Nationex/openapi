@@ -276,7 +276,7 @@ paths:
           schema:
             type: integer
             format: int32
-        - name: language
+        - name: lang
           in: query
           required: true
           description: Language of the report
