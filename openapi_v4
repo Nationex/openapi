@@ -1687,7 +1687,7 @@ components:
           description: "Weight of the parcel (lbs)"
         Status:
           type: string
-          enum: [Creation, Pickup, Transit, OutForDelivery, Delivered, OnHold, Attention, Cancelled, ReturnCompleted, OutForPickup, RefusedDelivery, ReturnToSender]
+          enum: [Creation, Pickup, Transit, OutForDelivery, Delivered, OnHold, Attention, Cancelled, ReturnCompleted, OutForPickup, PickupAttemptFailed, RefusedDelivery, ReturnToSender]
         StatusDescriptionEn:
           type: string
           description: 'Description of Status in english'
@@ -1843,7 +1843,7 @@ components:
           example: 5.5
         ShipmentStatus:
           type: string
-          enum: [Creation, Pickup, Transit, OutForDelivery, Delivered, OnHold, Attention, Cancelled, ReturnCompleted, OutForPickup, RefusedDelivery, ReturnToSender, PartiallyPickedUp, PartiallyInTransit, PartiallyOutForDelivery, PartiallyDelivered]
+          enum: [Creation, Pickup, Transit, OutForDelivery, Delivered, OnHold, Attention, Cancelled, ReturnCompleted, OutForPickup, PickupAttemptFailed, RefusedDelivery, ReturnToSender, PartiallyPickedUp, PartiallyInTransit, PartiallyOutForDelivery, PartiallyDelivered]
           description: "Global status of the entire shipment"
           example: 'Creation'
         ShipmentStatusFr:
@@ -2542,7 +2542,7 @@ SUVORK5CYII="
       properties:
         ShipmentStatus:
           type: string
-          enum: [Creation, Pickup, Transit, OutForDelivery, Delivered, OnHold, Attention, Cancelled, ReturnCompleted, OutForPickup, RefusedDelivery, ReturnToSender, PartiallyPickedUp, PartiallyInTransit, PartiallyOutForDelivery, PartiallyDelivered]
+          enum: [Creation, Pickup, Transit, OutForDelivery, Delivered, OnHold, Attention, Cancelled, ReturnCompleted, OutForPickup, PickupAttemptFailed, RefusedDelivery, ReturnToSender, PartiallyPickedUp, PartiallyInTransit, PartiallyOutForDelivery, PartiallyDelivered]
           description: "Global status of the entire shipment"
           example: 'DataReceived'
         ShipmentStatusFr:
