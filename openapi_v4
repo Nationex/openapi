@@ -911,17 +911,17 @@ paths:
             format: int32
         - in: query
           name: startDate
-          description: Starting date of the shipments included in the manifest. Defaults to current date
+          description: Starting datetime of the shipments included in the manifest. Defaults to current date.
           required: false
-          example: "2021-03-31"
+          example: "2021-03-31 00:00:00"
           schema:
             type: string
             format: date-time
         - in: query
           name: endDate
-          description: Ending date of the shipments included in the manifest. Defaults to current date
+          description: Ending datetime of the shipments included in the manifest. Defaults to current date.
           required: false
-          example: "2021-03-31"
+          example: "2021-03-31 23:59:59"
           schema:
             type: string
             format: date-time
