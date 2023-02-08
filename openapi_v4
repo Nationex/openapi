@@ -919,7 +919,7 @@ paths:
             format: date-time
         - in: query
           name: endDate
-          description: Ending datetime of the shipments included in the manifest. Defaults to current date.
+          description: Ending datetime of the shipments included in the manifest. Defaults to current date. If the startDate is the same as endDate, it will default to 00:00 to 23:59 instead of returning an empty range.
           required: false
           example: "2021-03-31 23:59:59"
           schema:
