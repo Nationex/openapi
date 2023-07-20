@@ -791,6 +791,13 @@ paths:
           schema:
             type: string
             format: date-time
+        - in: query
+          name: expeditionDate
+          description: If true, will use the expedition date and not the creation (insert) date. If null or false, creation date will be used.
+          required: false
+          example: "true"
+          schema:
+            type: boolean
       security:
         - BasicAuth: []
       responses:
