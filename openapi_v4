@@ -475,6 +475,58 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
+  /Shipments/{id}/labelsPng:
+    get:
+      tags:
+        - Shipments
+      summary: 'Get labels Png'
+      description: 'Returns labels attached to a particular shipment in PNG format'
+      operationId: getLabelsPng
+      parameters:
+        - name: id
+          in: path
+          description: ID of the shipment or ID of a parcel for a single label
+          required: true
+          example: 103848576
+          schema:
+            type: integer
+            format: int64
+        - name: orientation
+          in: query
+          description: Orientation of the file
+          example: landscape
+          required: false
+          schema:
+            type: string
+            enum: [landscape, portrait]
+            default: landscape
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DTOFile'
+        '404':
+          description: 'NotFound: The resource requested does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+              example: 
+                code: 404
+                message: "ShipmentId 501399432 does not exist"
+        '500':
+          description: 'InternalServerError:   There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
   /Shipments/{id}/dangerous:
     post:
       tags:
