@@ -27,6 +27,22 @@ info:
     Nationex Restfull API needs authentication:
       Basic authentication is a simple authentication scheme built into the HTTP protocol. The client sends HTTP requests with the `Authorization header` that contains the word Basic word followed by a space and **a base64-encoded string username:password**. 
       For example, to authorize as demo / p@55w0rd the client would send Authorization: Basic ZGVtbzpwQDU1dzByZA==
+
+    # Webhook
+    A webhook for updating shipment statuses is available but you will need to contact us to activate it.
+    Parameters we need :
+     - URL, example : https://api.test.com/nationex/{id}
+     - Http Method, example HttpPut
+     - Authorization header
+     
+    The {id} parameter is the Nationex Shipping Id
+     
+    You can provide an authorization header or we can provide you one.
+    
+    We will call your api endpoint every time a shipment status changes and provide a "DTOShipment" as request body.
+    
+    # ShipmentStatus enum :
+    "Creation", "Pickup", "Transit", "OutForDelivery", "Delivered", "OnHold", "Attention", "Cancelled", "ReturnCompleted", "OutForPickup", "PickupAttemptFailed", "RefusedDelivery", "ReturnToSender", "PartiallyPickedUp", "PartiallyInTransit", "PartiallyOutForDelivery", "PartiallyDelivered"
     
     # Other
     - Nationex logo : https://apidocs.nationex.com/images/Nationex_logo_CMYK.svg 
