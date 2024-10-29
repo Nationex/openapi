@@ -1984,7 +1984,7 @@ components:
           type: integer
           format: int32
           description: Nationex Customer ID of the billing account if different from shipping account
-          example: 165556
+          example: 0
         Sender:
           $ref: '#/components/schemas/DTOSender'
         Destination:
