@@ -1757,7 +1757,7 @@ components:
           maxLength: 15
         AccountName:
           type: string
-          description: Consignee namePickuPickpopokkkijijkjjjjnjnnnjjjjjjjjjjijijijijkkkkkkkkkkkkkokokokok
+          description: Consignee name
           example: Coffee Shop
           maxLength: 40
         Address1:
