@@ -2561,7 +2561,7 @@ SUVORK5CYII="
           type: string
           enum: [Creation, Pickup, Transit, OutForDelivery, Delivered, OnHold, Attention, Cancelled, ReturnCompleted, OutForPickup, PickupAttemptFailed, RefusedDelivery, ReturnToSender, PartiallyPickedUp, PartiallyInTransit, PartiallyOutForDelivery, PartiallyDelivered]
           description: "Global status of the entire shipment"
-          example: 'DataReceived'
+          example: 'Creation'
         ShipmentStatusFr:
           type: string
           description: "Readable ShipmentStatus in french"
