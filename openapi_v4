@@ -1644,6 +1644,8 @@ components:
           type: string
           maxLength: 255
           example: example@gmail.com
+        Geocoding:
+          $ref: '#/components/schemas/DTOGeocoding'
     DTODimensions:
       type: object
       properties:
@@ -1813,6 +1815,8 @@ components:
         Email:
           type: string
           example: example@gmail.com
+        Geocoding:
+          $ref: '#/components/schemas/DTOGeocoding'
     DTOShipment:
       type: object
       required:
