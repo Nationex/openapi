@@ -1738,6 +1738,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DTOParcelHistory'
+        ParcelStatusHistories:
+          type: array
+          items:
+            $ref: '#/components/schemas/DTOParcelStatusHistory'
     DTOSender:
       type: object
       required:
@@ -2715,5 +2719,28 @@ SUVORK5CYII="
         ParcelId: 
           type: number
           example: 59921803901
+    DTOParcelStatusHistory:
+      description: "History of parcel status, Same as DTOShipmentStatusHistory but fewer statuses"
+      type: object
+      properties:
+        ParcelStatus:
+          type: string
+          enum: [Creation, Pickup, Transit, OutForDelivery, Delivered, OnHold, Attention, Cancelled, ReturnCompleted, OutForPickup, PickupAttemptFailed, RefusedDelivery, ReturnToSender]
+          description: "Global status of the entire shipment"
+          example: 'Creation'
+        ParcelStatusFr:
+          type: string
+          description: "Readable ParcelStatus in french"
+          example: "Données reçues"
+        ParcelStatusEn:
+          type: string
+          description: "Readable ParcelStatus in english"
+          example: "Data received"
+        StatusDate:
+          type: string
+          format: date-time
+        LastLocation:
+          type: string
+          example: St-Hubert
 security:
     - BasicAuth: []
