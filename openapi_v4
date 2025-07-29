@@ -1453,6 +1453,41 @@ paths:
               example: 
                 code: 500
                 message: "Internal server error"
+  /PointsOfService/List:
+    get:
+      tags:
+        - PointsOfService
+      summary: 'Get Points of service list'
+      description: 'Get list of locations where Nationex can deposit parcels and consignees can pick them up'
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: 'Ok'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DTOPointOfService'
+        '401':
+          description: 'Unauthorized: The key is either missing, or is used on the wrong server, or is not associated with the provided CustomerId. Dev keys can only be used on our dev servers and production keys can only be used on our production servers.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Unauthorized'
+              example: 
+                code: 401
+                message: "Invalid key"
+        '500':
+          description: 'InternalServerError:   There has been an unexpected error in our server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalServerError'
+              example: 
+                code: 500
+                message: "Internal server error"
 components:
   securitySchemes:
     BasicAuth:     # <-- arbitrary name for the security scheme
@@ -2010,6 +2045,10 @@ components:
           enum: [LI, KC]
           example: LI
           default: LI
+        PointOfServiceId:
+          description : "Id of the DTOPointOfService, a location where Nationex will deposit parcels and the consignee has to pick it up. Nationex will deliver directly to the point of service if this property is not null, and the Destination address (consignee address) will be overwritten by the address of this Point of service. The list of available points of services can be obtained using GET /PointsOfService/List. Points of services have to be activated on the Nationex customer for this to be available, by default it's unavailable. Only active locations are returned."
+          type : number
+          example : 847
     DTOShipmentCreated:
       type: object
       properties:
@@ -2171,7 +2210,7 @@ components:
           example:
           - Id: '1'
             Charge: 12.97
-            NameFr: ASSURANCE SUPPL├ëMENTAIRE
+            NameFr: ASSURANCE SUPPL+ëMENTAIRE
             NameEn: ADDITIONNAL INSURANCE
           - Id: '2'
             Charge: 05.125
@@ -2179,7 +2218,7 @@ components:
             NameEn: CASH OR CHEQUE ON DELIVERY
           - Id: '3'
             Charge: 11.366
-            NameFr: MATI├êRE DANGEREUSES
+            NameFr: MATI+êRE DANGEREUSES
             NameEn: DANGEROUS GOODS
           - Id: '4'
             Charge: 16.351
@@ -2742,5 +2781,45 @@ SUVORK5CYII="
         LastLocation:
           type: string
           example: St-Hubert
+    DTOPointOfService:
+      description: "Location where Nationex can deposit parcels and consignees can pick them up"
+      type: object
+      properties:
+        PointOfServiceId:
+          type: number
+          description: "Nationex Id of the point of service, to be used in DTOCreateShipment.PointOfServiceId"
+          example: 847
+        Name:
+          type: string
+          description: "Location name"
+          example: "Depanneur Boni Soir"
+        Address1:
+          type: string
+          description: "Location address 1"
+          example: "12543 Avenue Fernand-Gauthier"
+        Address2:
+          type: string
+          description: "Location address 2"
+          example: "Local #103"
+        PostalCode:
+          type: string
+          description: "Location postal code"
+          example: "H1E2X2"
+        City:
+          type: string
+          description: "Location city"
+          example: "Montreal"
+        Phone:
+          type: string
+          description: "Location phone"
+          example: "5144944056"
+        Latitude:
+          type: number
+          description: "Location latitude"
+          example: "-73.6040237"
+        Longitude:
+          type: number
+          description: "Location longitude"
+          example: "45.6358175"
 security:
     - BasicAuth: []
